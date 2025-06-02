@@ -21,6 +21,11 @@
 		BCCBD8322DEDFF6A000EFC99 /* TaskCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8312DEDFF6A000EFC99 /* TaskCD.swift */; };
 		BCCBD8342DEE0149000EFC99 /* TaskModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8332DEE0149000EFC99 /* TaskModelContainer.swift */; };
 		BCCBD8372DEE075A000EFC99 /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8362DEE075A000EFC99 /* ServiceError.swift */; };
+		BCCBD83B2DEE1436000EFC99 /* TaskListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD83A2DEE142F000EFC99 /* TaskListDTO.swift */; };
+		BCCBD83F2DEE17F8000EFC99 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD83E2DEE17F8000EFC99 /* EndPoint.swift */; };
+		BCCBD8412DEE184C000EFC99 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8402DEE184C000EFC99 /* HttpMethod.swift */; };
+		BCCBD8432DEE1B29000EFC99 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8422DEE1B29000EFC99 /* NetworkService.swift */; };
+		BCCBD8452DEE2108000EFC99 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8442DEE2108000EFC99 /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +64,11 @@
 		BCCBD8312DEDFF6A000EFC99 /* TaskCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCD.swift; sourceTree = "<group>"; };
 		BCCBD8332DEE0149000EFC99 /* TaskModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModelContainer.swift; sourceTree = "<group>"; };
 		BCCBD8362DEE075A000EFC99 /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
+		BCCBD83A2DEE142F000EFC99 /* TaskListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListDTO.swift; sourceTree = "<group>"; };
+		BCCBD83E2DEE17F8000EFC99 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		BCCBD8402DEE184C000EFC99 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
+		BCCBD8422DEE1B29000EFC99 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		BCCBD8442DEE2108000EFC99 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +160,7 @@
 		BCCBD8242DEDED9C000EFC99 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				BCCBD83C2DEE17D2000EFC99 /* NetworkService */,
 				BCCBD8352DEE0746000EFC99 /* ServiceError */,
 				BCCBD8252DEDEDA7000EFC99 /* TaskCoreData */,
 			);
@@ -169,6 +180,7 @@
 		BCCBD82B2DEDF3C0000EFC99 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BCCBD83A2DEE142F000EFC99 /* TaskListDTO.swift */,
 				BCCBD82C2DEDF417000EFC99 /* TaskDTO.swift */,
 			);
 			path = Models;
@@ -185,9 +197,28 @@
 		BCCBD8352DEE0746000EFC99 /* ServiceError */ = {
 			isa = PBXGroup;
 			children = (
+				BCCBD8442DEE2108000EFC99 /* NetworkError.swift */,
 				BCCBD8362DEE075A000EFC99 /* ServiceError.swift */,
 			);
 			path = ServiceError;
+			sourceTree = "<group>";
+		};
+		BCCBD83C2DEE17D2000EFC99 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				BCCBD8422DEE1B29000EFC99 /* NetworkService.swift */,
+				BCCBD83D2DEE17E0000EFC99 /* RequestModels */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		BCCBD83D2DEE17E0000EFC99 /* RequestModels */ = {
+			isa = PBXGroup;
+			children = (
+				BCCBD83E2DEE17F8000EFC99 /* EndPoint.swift */,
+				BCCBD8402DEE184C000EFC99 /* HttpMethod.swift */,
+			);
+			path = RequestModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,13 +359,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCCBD82A2DEDEFC4000EFC99 /* TaskModel.xcdatamodeld in Sources */,
+				BCCBD8452DEE2108000EFC99 /* NetworkError.swift in Sources */,
 				BCCBD82F2DEDF55D000EFC99 /* TaskServiceCD.swift in Sources */,
 				BCCBD8322DEDFF6A000EFC99 /* TaskCD.swift in Sources */,
 				BCCBD8142DEDE7F8000EFC99 /* AppDelegate.swift in Sources */,
+				BCCBD8412DEE184C000EFC99 /* HttpMethod.swift in Sources */,
+				BCCBD83F2DEE17F8000EFC99 /* EndPoint.swift in Sources */,
+				BCCBD83B2DEE1436000EFC99 /* TaskListDTO.swift in Sources */,
 				BCCBD82D2DEDF417000EFC99 /* TaskDTO.swift in Sources */,
 				BCCBD8152DEDE7F8000EFC99 /* SceneDelegate.swift in Sources */,
 				BCCBD8372DEE075A000EFC99 /* ServiceError.swift in Sources */,
 				BCCBD8162DEDE7F8000EFC99 /* ViewController.swift in Sources */,
+				BCCBD8432DEE1B29000EFC99 /* NetworkService.swift in Sources */,
 				BCCBD8342DEE0149000EFC99 /* TaskModelContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
