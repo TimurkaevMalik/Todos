@@ -1,0 +1,162 @@
+//
+//  CoreDataTaskService.swift
+//  Todos
+//
+//  Created by Malik Timurkaev on 02.06.2025.
+//
+
+
+import CoreData
+
+protocol TaskServiceCDProtocol {
+    func createTask(_ task: TaskDTO,
+                    completion: @escaping (Result<TaskDTO, ServiceError>) -> Void)
+    
+    func fetchAllTasks(completion: @escaping(Result<[TaskDTO], ServiceError>) -> Void)
+    
+    func updateTask(_ task: TaskDTO,
+                    completion: @escaping (Result<Void, ServiceError>) -> Void)
+    
+    func deleteTask(by id: UUID,
+                    completion: @escaping (Result<Void, ServiceError>) -> Void)
+}
+
+final class TaskServiceCD: TaskServiceCDProtocol {
+    private let coreDataStack: TaskModelContainer
+    private let serialQueue = DispatchQueue(label: "TaskServiceCD.queue",
+                                            qos: .userInitiated)
+    
+    init(coreDataStack: TaskModelContainer = TaskModelContainer.shared) {
+        self.coreDataStack = coreDataStack
+    }
+    
+    // MARK: - Create
+    func createTask(_ task: TaskDTO, completion: @escaping (Result<TaskDTO, ServiceError>) -> Void) {
+        
+        serialQueue.async {
+            let backgroundContext = self.coreDataStack.newBackgroundContext()
+            
+            backgroundContext.performAndWait {
+                do {
+                    let taskCD = TaskCD(context: backgroundContext)
+                    taskCD.id = task.id
+                    taskCD.createdAt = task.createdAt
+                    taskCD.title = task.title
+                    taskCD.todo = task.todo
+                    taskCD.isCompleted = task.isCompleted
+                    
+                    try backgroundContext.save()
+                    
+                    DispatchQueue.main.async {
+                        completion(.success(task))
+                    }
+                } catch let error as NSError {
+                    DispatchQueue.main.async {
+                        
+                        completion(.failure(
+                            .operation(.insertion,
+                                       code: "\(error.code)")))
+                    }
+                }
+            }
+        }
+    }
+    
+    // MARK: - Read
+    func fetchAllTasks(completion: @escaping (Result<[TaskDTO], ServiceError>) -> Void) {
+        
+        serialQueue.async {
+            let backgroundContext = self.coreDataStack.newBackgroundContext()
+            
+            backgroundContext.performAndWait {
+                do {
+                    let request: NSFetchRequest<TaskCD> = TaskCD.fetchRequest()
+                    request.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
+                    
+                    let tasksCD = try backgroundContext.fetch(request)
+                    let tasksDTO = tasksCD.map { $0.toDTO() }
+                    
+                    DispatchQueue.main.async {
+                        completion(.success(tasksDTO))
+                    }
+                } catch let error as NSError {
+                    DispatchQueue.main.async {
+                        
+                        completion(.failure(
+                            .operation(.retrieve,
+                                       code: "\(error.code)")))
+                    }
+                }
+            }
+        }
+    }
+    
+    // MARK: - Update
+    func updateTask(_ task: TaskDTO, completion: @escaping (Result<Void, ServiceError>) -> Void) {
+        
+        serialQueue.async {
+            let backgroundContext = self.coreDataStack.newBackgroundContext()
+            
+            backgroundContext.performAndWait {
+                do {
+                    let request: NSFetchRequest<TaskCD> = TaskCD.fetchRequest()
+                    request.predicate = NSPredicate(format: "id == %@", task.id as CVarArg)
+                    
+                    guard let taskCD = try backgroundContext.fetch(request).first else {
+                        throw NSError(domain: "TaskNotFound", code: 404, userInfo: nil)
+                    }
+                    
+                    taskCD.title = task.title
+                    taskCD.todo = task.todo
+                    taskCD.isCompleted = task.isCompleted
+                    
+                    try backgroundContext.save()
+                    
+                    DispatchQueue.main.async {
+                        completion(.success(()))
+                    }
+                } catch let error as NSError {
+                    DispatchQueue.main.async {
+                        
+                        completion(.failure(
+                            .operation(.update,
+                                       code: "\(error.code)")))
+                    }
+                }
+            }
+        }
+    }
+    
+    // MARK: - Delete
+    func deleteTask(by id: UUID, completion: @escaping (Result<Void, ServiceError>) -> Void) {
+        
+        serialQueue.async {
+            let backgroundContext = self.coreDataStack.newBackgroundContext()
+            
+            backgroundContext.performAndWait {
+                do {
+                    let request: NSFetchRequest<TaskCD> = TaskCD.fetchRequest()
+                    request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+                    
+                    guard let taskCD = try backgroundContext.fetch(request).first else {
+                        throw NSError(domain: "TaskNotFound", code: 404, userInfo: nil)
+                    }
+                    
+                    backgroundContext.delete(taskCD)
+                    try backgroundContext.save()
+                    
+                    DispatchQueue.main.async {
+                        completion(.success(()))
+                    }
+                } catch let error as NSError {
+                    DispatchQueue.main.async {
+                        
+                        completion(.failure(
+                            .operation(.deletion,
+                                       code: "\(error.code)")))
+                    }
+                }
+            }
+        }
+    }
+}

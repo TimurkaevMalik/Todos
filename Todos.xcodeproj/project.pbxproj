@@ -15,7 +15,12 @@
 		BCCBD81D2DEDE806000EFC99 /* TodosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD81B2DEDE806000EFC99 /* TodosTests.swift */; };
 		BCCBD8212DEDE808000EFC99 /* TodosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD81E2DEDE808000EFC99 /* TodosUITests.swift */; };
 		BCCBD8222DEDE808000EFC99 /* TodosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD81F2DEDE808000EFC99 /* TodosUITestsLaunchTests.swift */; };
-		BCCBD82A2DEDEFC4000EFC99 /* TaskContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8282DEDEFC4000EFC99 /* TaskContainer.xcdatamodeld */; };
+		BCCBD82A2DEDEFC4000EFC99 /* TaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8282DEDEFC4000EFC99 /* TaskModel.xcdatamodeld */; };
+		BCCBD82D2DEDF417000EFC99 /* TaskDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD82C2DEDF417000EFC99 /* TaskDTO.swift */; };
+		BCCBD82F2DEDF55D000EFC99 /* TaskServiceCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD82E2DEDF55D000EFC99 /* TaskServiceCD.swift */; };
+		BCCBD8322DEDFF6A000EFC99 /* TaskCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8312DEDFF6A000EFC99 /* TaskCD.swift */; };
+		BCCBD8342DEE0149000EFC99 /* TaskModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8332DEE0149000EFC99 /* TaskModelContainer.swift */; };
+		BCCBD8372DEE075A000EFC99 /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8362DEE075A000EFC99 /* ServiceError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +53,12 @@
 		BCCBD81B2DEDE806000EFC99 /* TodosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosTests.swift; sourceTree = "<group>"; };
 		BCCBD81E2DEDE808000EFC99 /* TodosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosUITests.swift; sourceTree = "<group>"; };
 		BCCBD81F2DEDE808000EFC99 /* TodosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		BCCBD8292DEDEFC4000EFC99 /* TaskContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskContainer.xcdatamodel; sourceTree = "<group>"; };
+		BCCBD8292DEDEFC4000EFC99 /* TaskModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskModel.xcdatamodel; sourceTree = "<group>"; };
+		BCCBD82C2DEDF417000EFC99 /* TaskDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDTO.swift; sourceTree = "<group>"; };
+		BCCBD82E2DEDF55D000EFC99 /* TaskServiceCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskServiceCD.swift; sourceTree = "<group>"; };
+		BCCBD8312DEDFF6A000EFC99 /* TaskCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCD.swift; sourceTree = "<group>"; };
+		BCCBD8332DEE0149000EFC99 /* TaskModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModelContainer.swift; sourceTree = "<group>"; };
+		BCCBD8362DEE075A000EFC99 /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +109,8 @@
 		BCCBD8132DEDE7F8000EFC99 /* Todos */ = {
 			isa = PBXGroup;
 			children = (
+				BCCBD8302DEDFF5F000EFC99 /* Extensions */,
+				BCCBD82B2DEDF3C0000EFC99 /* Models */,
 				BCCBD8242DEDED9C000EFC99 /* Services */,
 				BCCBD8232DEDE899000EFC99 /* ViewControllers */,
 				BCCBD80A2DEDE7F8000EFC99 /* AppDelegate.swift */,
@@ -138,17 +150,44 @@
 		BCCBD8242DEDED9C000EFC99 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				BCCBD8252DEDEDA7000EFC99 /* CoreData */,
+				BCCBD8352DEE0746000EFC99 /* ServiceError */,
+				BCCBD8252DEDEDA7000EFC99 /* TaskCoreData */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		BCCBD8252DEDEDA7000EFC99 /* CoreData */ = {
+		BCCBD8252DEDEDA7000EFC99 /* TaskCoreData */ = {
 			isa = PBXGroup;
 			children = (
-				BCCBD8282DEDEFC4000EFC99 /* TaskContainer.xcdatamodeld */,
+				BCCBD8282DEDEFC4000EFC99 /* TaskModel.xcdatamodeld */,
+				BCCBD8332DEE0149000EFC99 /* TaskModelContainer.swift */,
+				BCCBD82E2DEDF55D000EFC99 /* TaskServiceCD.swift */,
 			);
-			path = CoreData;
+			path = TaskCoreData;
+			sourceTree = "<group>";
+		};
+		BCCBD82B2DEDF3C0000EFC99 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BCCBD82C2DEDF417000EFC99 /* TaskDTO.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BCCBD8302DEDFF5F000EFC99 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BCCBD8312DEDFF6A000EFC99 /* TaskCD.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BCCBD8352DEE0746000EFC99 /* ServiceError */ = {
+			isa = PBXGroup;
+			children = (
+				BCCBD8362DEE075A000EFC99 /* ServiceError.swift */,
+			);
+			path = ServiceError;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,10 +327,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCCBD82A2DEDEFC4000EFC99 /* TaskContainer.xcdatamodeld in Sources */,
+				BCCBD82A2DEDEFC4000EFC99 /* TaskModel.xcdatamodeld in Sources */,
+				BCCBD82F2DEDF55D000EFC99 /* TaskServiceCD.swift in Sources */,
+				BCCBD8322DEDFF6A000EFC99 /* TaskCD.swift in Sources */,
 				BCCBD8142DEDE7F8000EFC99 /* AppDelegate.swift in Sources */,
+				BCCBD82D2DEDF417000EFC99 /* TaskDTO.swift in Sources */,
 				BCCBD8152DEDE7F8000EFC99 /* SceneDelegate.swift in Sources */,
+				BCCBD8372DEE075A000EFC99 /* ServiceError.swift in Sources */,
 				BCCBD8162DEDE7F8000EFC99 /* ViewController.swift in Sources */,
+				BCCBD8342DEE0149000EFC99 /* TaskModelContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,13 +672,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		BCCBD8282DEDEFC4000EFC99 /* TaskContainer.xcdatamodeld */ = {
+		BCCBD8282DEDEFC4000EFC99 /* TaskModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				BCCBD8292DEDEFC4000EFC99 /* TaskContainer.xcdatamodel */,
+				BCCBD8292DEDEFC4000EFC99 /* TaskModel.xcdatamodel */,
 			);
-			currentVersion = BCCBD8292DEDEFC4000EFC99 /* TaskContainer.xcdatamodel */;
-			path = TaskContainer.xcdatamodeld;
+			currentVersion = BCCBD8292DEDEFC4000EFC99 /* TaskModel.xcdatamodel */;
+			path = TaskModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
