@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BCA38B162DEF12B60009417F /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B152DEF12B20009417F /* UIFont.swift */; };
+		BCA38B182DEF22F70009417F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B172DEF22F70009417F /* String.swift */; };
 		BCCBD8142DEDE7F8000EFC99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD80A2DEDE7F8000EFC99 /* AppDelegate.swift */; };
 		BCCBD8152DEDE7F8000EFC99 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8112DEDE7F8000EFC99 /* SceneDelegate.swift */; };
-		BCCBD8162DEDE7F8000EFC99 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8122DEDE7F8000EFC99 /* ViewController.swift */; };
+		BCCBD8162DEDE7F8000EFC99 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8122DEDE7F8000EFC99 /* TasksViewController.swift */; };
 		BCCBD8172DEDE7F8000EFC99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCCBD80B2DEDE7F8000EFC99 /* Assets.xcassets */; };
 		BCCBD8192DEDE7F8000EFC99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCCBD80E2DEDE7F8000EFC99 /* LaunchScreen.storyboard */; };
 		BCCBD81D2DEDE806000EFC99 /* TodosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD81B2DEDE806000EFC99 /* TodosTests.swift */; };
@@ -26,6 +28,8 @@
 		BCCBD8412DEE184C000EFC99 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8402DEE184C000EFC99 /* HttpMethod.swift */; };
 		BCCBD8432DEE1B29000EFC99 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8422DEE1B29000EFC99 /* NetworkService.swift */; };
 		BCCBD8452DEE2108000EFC99 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8442DEE2108000EFC99 /* NetworkError.swift */; };
+		BCCBD8482DEE31FB000EFC99 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8472DEE31F6000EFC99 /* TaskCell.swift */; };
+		BCCBD84A2DEE3322000EFC99 /* CheckMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8492DEE3313000EFC99 /* CheckMarkButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BCA38B152DEF12B20009417F /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		BCA38B172DEF22F70009417F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BCCBD7D62DEDE7E9000EFC99 /* Todos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCBD7EC2DEDE7EB000EFC99 /* TodosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCBD7F62DEDE7EB000EFC99 /* TodosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,7 +60,7 @@
 		BCCBD80C2DEDE7F8000EFC99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCCBD80D2DEDE7F8000EFC99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BCCBD8112DEDE7F8000EFC99 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BCCBD8122DEDE7F8000EFC99 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BCCBD8122DEDE7F8000EFC99 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		BCCBD81B2DEDE806000EFC99 /* TodosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosTests.swift; sourceTree = "<group>"; };
 		BCCBD81E2DEDE808000EFC99 /* TodosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosUITests.swift; sourceTree = "<group>"; };
 		BCCBD81F2DEDE808000EFC99 /* TodosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -69,6 +75,8 @@
 		BCCBD8402DEE184C000EFC99 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		BCCBD8422DEE1B29000EFC99 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BCCBD8442DEE2108000EFC99 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		BCCBD8472DEE31F6000EFC99 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		BCCBD8492DEE3313000EFC99 /* CheckMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMarkButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +127,7 @@
 		BCCBD8132DEDE7F8000EFC99 /* Todos */ = {
 			isa = PBXGroup;
 			children = (
+				BCCBD8462DEE31ED000EFC99 /* CustomViews */,
 				BCCBD8302DEDFF5F000EFC99 /* Extensions */,
 				BCCBD82B2DEDF3C0000EFC99 /* Models */,
 				BCCBD8242DEDED9C000EFC99 /* Services */,
@@ -152,7 +161,7 @@
 		BCCBD8232DEDE899000EFC99 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				BCCBD8122DEDE7F8000EFC99 /* ViewController.swift */,
+				BCCBD8122DEDE7F8000EFC99 /* TasksViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -189,6 +198,8 @@
 		BCCBD8302DEDFF5F000EFC99 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				BCA38B172DEF22F70009417F /* String.swift */,
+				BCA38B152DEF12B20009417F /* UIFont.swift */,
 				BCCBD8312DEDFF6A000EFC99 /* TaskCD.swift */,
 			);
 			path = Extensions;
@@ -219,6 +230,15 @@
 				BCCBD8402DEE184C000EFC99 /* HttpMethod.swift */,
 			);
 			path = RequestModels;
+			sourceTree = "<group>";
+		};
+		BCCBD8462DEE31ED000EFC99 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				BCCBD8492DEE3313000EFC99 /* CheckMarkButton.swift */,
+				BCCBD8472DEE31F6000EFC99 /* TaskCell.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,9 +379,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCCBD82A2DEDEFC4000EFC99 /* TaskModel.xcdatamodeld in Sources */,
+				BCA38B162DEF12B60009417F /* UIFont.swift in Sources */,
 				BCCBD8452DEE2108000EFC99 /* NetworkError.swift in Sources */,
 				BCCBD82F2DEDF55D000EFC99 /* TaskServiceCD.swift in Sources */,
 				BCCBD8322DEDFF6A000EFC99 /* TaskCD.swift in Sources */,
+				BCCBD8482DEE31FB000EFC99 /* TaskCell.swift in Sources */,
+				BCCBD84A2DEE3322000EFC99 /* CheckMarkButton.swift in Sources */,
+				BCA38B182DEF22F70009417F /* String.swift in Sources */,
 				BCCBD8142DEDE7F8000EFC99 /* AppDelegate.swift in Sources */,
 				BCCBD8412DEE184C000EFC99 /* HttpMethod.swift in Sources */,
 				BCCBD83F2DEE17F8000EFC99 /* EndPoint.swift in Sources */,
@@ -369,7 +393,7 @@
 				BCCBD82D2DEDF417000EFC99 /* TaskDTO.swift in Sources */,
 				BCCBD8152DEDE7F8000EFC99 /* SceneDelegate.swift in Sources */,
 				BCCBD8372DEE075A000EFC99 /* ServiceError.swift in Sources */,
-				BCCBD8162DEDE7F8000EFC99 /* ViewController.swift in Sources */,
+				BCCBD8162DEDE7F8000EFC99 /* TasksViewController.swift in Sources */,
 				BCCBD8432DEE1B29000EFC99 /* NetworkService.swift in Sources */,
 				BCCBD8342DEE0149000EFC99 /* TaskModelContainer.swift in Sources */,
 			);
