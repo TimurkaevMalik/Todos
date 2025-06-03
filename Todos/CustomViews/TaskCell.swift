@@ -107,6 +107,8 @@ private extension TaskCell {
         let verticalSpacing: CGFloat = 12
         
         NSLayoutConstraint.activate([
+            checkMarkButton.widthAnchor.constraint(equalToConstant: 24),
+            checkMarkButton.heightAnchor.constraint(equalTo: checkMarkButton.widthAnchor),
             
             checkMarkButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             checkMarkButton.topAnchor.constraint(equalTo: topAnchor, constant: verticalSpacing),

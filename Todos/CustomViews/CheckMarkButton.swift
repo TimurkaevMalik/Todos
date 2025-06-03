@@ -10,10 +10,18 @@ import UIKit
 final class CheckMarkButton: UIButton {
     
     var isMarked: Bool = false {
-        didSet {
-            updateAppearance()
-        }
+        didSet { updateAppearance() }
     }
+    
+    private let checkmarkImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(systemName: "checkmark")
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .appYellow
+        imageView.isHidden = true
+        return imageView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,25 +32,26 @@ final class CheckMarkButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI(){
+    private func setupUI() {
         backgroundColor = .appBlack
         layer.masksToBounds = true
         layer.cornerRadius = 12
         layer.borderWidth = 1
         
-        setImage(UIImage(systemName: "checkmark"), for: .normal)
-        imageView?.contentMode = .scaleAspectFit
-        updateAppearance()
-        
+        addSubview(checkmarkImageView)
+                
         NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalToConstant: 12),
-            heightAnchor.constraint(equalTo: widthAnchor)
+            checkmarkImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            checkmarkImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            checkmarkImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
+            checkmarkImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4)
         ])
+        
+        updateAppearance()
     }
     
     private func updateAppearance() {
         layer.borderColor = isMarked ? UIColor.appYellow.cgColor : UIColor.appGrayMedium.cgColor
-        
-        imageView?.isHidden = isMarked
+        checkmarkImageView.isHidden = !isMarked
     }
 }
