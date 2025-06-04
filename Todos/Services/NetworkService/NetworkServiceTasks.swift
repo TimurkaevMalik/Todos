@@ -1,5 +1,5 @@
 //
-//  NetworkService.swift
+//  NetworkServiceTasks.swift
 //  Todos
 //
 //  Created by Malik Timurkaev on 02.06.2025.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol NetworkServiceProtocol {
+protocol NetworkServiceTasksProtocol {
     func fetchTasks(_ completion: @escaping (Result<[TaskDTO], Error>) -> Void)
 }
 
-final class NetworkService: NetworkServiceProtocol {
+final class NetworkServiceTasks: NetworkServiceTasksProtocol {
     
     private let session: URLSession
     private let decoder: JSONDecoder

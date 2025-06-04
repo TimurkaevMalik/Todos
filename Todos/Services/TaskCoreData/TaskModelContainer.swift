@@ -7,8 +7,15 @@
 
 import CoreData
 
-final class TaskModelContainer {
+protocol AnyTaskModelContainer {
+    func newBackgroundContext() -> NSManagedObjectContext
+}
+
+final class TaskModelContainer: AnyTaskModelContainer {
+    
     static let shared = TaskModelContainer()
+    
+    private init() {}
     
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "TaskModel")
@@ -21,10 +28,6 @@ final class TaskModelContainer {
         container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
-    
-    var viewContext: NSManagedObjectContext {
-        persistentContainer.viewContext
-    }
     
     func newBackgroundContext() -> NSManagedObjectContext {
         let context = persistentContainer.newBackgroundContext()

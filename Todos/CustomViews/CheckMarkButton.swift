@@ -17,7 +17,7 @@ final class CheckMarkButton: UIButton {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(systemName: "checkmark")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleToFill
         imageView.tintColor = .appYellow
         imageView.isHidden = true
         return imageView
@@ -39,12 +39,12 @@ final class CheckMarkButton: UIButton {
         layer.borderWidth = 1
         
         addSubview(checkmarkImageView)
-                
+        
         NSLayoutConstraint.activate([
             checkmarkImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             checkmarkImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            checkmarkImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
-            checkmarkImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4)
+            checkmarkImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
+            checkmarkImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7)
         ])
         
         updateAppearance()

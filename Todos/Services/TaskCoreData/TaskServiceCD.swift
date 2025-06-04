@@ -8,7 +8,7 @@
 
 import CoreData
 
-protocol TaskServiceCDProtocol {
+protocol TaskDataBaseServiceProtocol {
     func createTask(_ task: TaskDTO,
                     completion: @escaping (Result<TaskDTO, ServiceError>) -> Void)
     
@@ -21,12 +21,12 @@ protocol TaskServiceCDProtocol {
                     completion: @escaping (Result<Void, ServiceError>) -> Void)
 }
 
-final class TaskServiceCD: TaskServiceCDProtocol {
-    private let coreDataStack: TaskModelContainer
+final class TaskServiceCD: TaskDataBaseServiceProtocol {
+    private let coreDataStack: AnyTaskModelContainer
     private let serialQueue = DispatchQueue(label: "TaskServiceCD.queue",
                                             qos: .userInitiated)
     
-    init(coreDataStack: TaskModelContainer = TaskModelContainer.shared) {
+    init(coreDataStack: AnyTaskModelContainer) {
         self.coreDataStack = coreDataStack
     }
     
