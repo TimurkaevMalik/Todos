@@ -24,6 +24,8 @@ final class TaskCell: UITableViewCell {
     private lazy var taskEditorButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 12
+        button.layer.masksToBounds = true
         
         button.addAction(
             UIAction(handler: { [weak self] _ in
@@ -76,15 +78,15 @@ final class TaskCell: UITableViewCell {
         return label
     }()
     
-    private lazy var menuBackgroundView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .appGray.withAlphaComponent(0.2)
-        view.layer.cornerRadius = 12
-        view.clipsToBounds = true
-        view.isHidden = true
-        return view
-    }()
+//    private lazy var menuBackgroundView: UIView = {
+//        let view = UIView()
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .appGray.withAlphaComponent(0.2)
+//        view.layer.cornerRadius = 12
+//        view.clipsToBounds = true
+//        view.isHidden = true
+//        return view
+//    }()
     
     
     override init(style: UITableViewCell.CellStyle,
@@ -141,16 +143,16 @@ private extension TaskCell {
         backgroundColor = .appBlack
         
         addSubview(checkMarkButton)
+        addSubview(taskEditorButton)
         addSubview(titleLabel)
         addSubview(descriptionLabel)
         addSubview(dateLabel)
-        addSubview(taskEditorButton)
-        sendSubviewToBack(taskEditorButton)
         
         taskEditorButton.backgroundColor = .appBlack
         
         let topAnchorConstant: CGFloat = 6
         let verticalSpacing: CGFloat = 12
+        
         
         NSLayoutConstraint.activate([
             checkMarkButton.widthAnchor.constraint(equalToConstant: 24),
@@ -159,64 +161,29 @@ private extension TaskCell {
             checkMarkButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             checkMarkButton.topAnchor.constraint(equalTo: topAnchor, constant: verticalSpacing),
             
-            titleLabel.centerYAnchor.constraint(equalTo: checkMarkButton.centerYAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: checkMarkButton.trailingAnchor, constant: 8),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            taskEditorButton.topAnchor.constraint(equalTo: topAnchor),
+            taskEditorButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+            taskEditorButton.leadingAnchor.constraint(equalTo: checkMarkButton.trailingAnchor),
+            taskEditorButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            titleLabel.topAnchor.constraint(equalTo: taskEditorButton.topAnchor, constant: verticalSpacing),
+            titleLabel.leadingAnchor.constraint(equalTo: taskEditorButton.leadingAnchor, constant: 8),
+            titleLabel.trailingAnchor.constraint(equalTo: taskEditorButton.trailingAnchor),
             
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: topAnchorConstant),
             descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            descriptionLabel.trailingAnchor.constraint(equalTo: taskEditorButton.trailingAnchor),
             
             dateLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            dateLabel.trailingAnchor.constraint(equalTo: taskEditorButton.trailingAnchor),
             dateLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: topAnchorConstant),
-            dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalSpacing),
-            
-            taskEditorButton.topAnchor.constraint(equalTo: topAnchor, constant: verticalSpacing),
-            taskEditorButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalSpacing),
-            taskEditorButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            taskEditorButton.trailingAnchor.constraint(equalTo: trailingAnchor)
+            dateLabel.bottomAnchor.constraint(equalTo: taskEditorButton.bottomAnchor, constant: -verticalSpacing),
         ])
     }
 }
 
+///Mark: ContextMenu setup
 private extension TaskCell {
-    private func setupMenuUI() {
-        addSubview(menuBackgroundView)
-        
-        // Переносим лейблы на menuBackgroundView когда активно
-        menuBackgroundView.addSubview(titleLabel)
-        menuBackgroundView.addSubview(descriptionLabel)
-        menuBackgroundView.addSubview(dateLabel)
-        menuBackgroundView.addSubview(checkMarkButton)
-        
-        NSLayoutConstraint.activate([
-            menuBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            menuBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            menuBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            menuBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
-            // Констрейнты для лейблов внутри menuBackgroundView
-            checkMarkButton.leadingAnchor.constraint(equalTo: menuBackgroundView.leadingAnchor, constant: 16),
-            checkMarkButton.topAnchor.constraint(equalTo: menuBackgroundView.topAnchor, constant: 16),
-            checkMarkButton.widthAnchor.constraint(equalToConstant: 24),
-            checkMarkButton.heightAnchor.constraint(equalToConstant: 24),
-            
-            titleLabel.leadingAnchor.constraint(equalTo: checkMarkButton.trailingAnchor, constant: 8),
-            titleLabel.trailingAnchor.constraint(equalTo: menuBackgroundView.trailingAnchor, constant: -16),
-            titleLabel.topAnchor.constraint(equalTo: menuBackgroundView.topAnchor, constant: 16),
-            
-            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
-            
-            dateLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            dateLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 4),
-            dateLabel.bottomAnchor.constraint(lessThanOrEqualTo: menuBackgroundView.bottomAnchor, constant: -16)
-        ])
-    }
-
     private func setupInteraction() {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         addGestureRecognizer(longPress)
@@ -254,11 +221,13 @@ private extension TaskCell {
     }
 
     private func showMenu() {
-        menuBackgroundView.isHidden = false
+//        menuBackgroundView.isHidden = false
+        taskEditorButton.backgroundColor = .appGrayLight
     }
 
     private func hideMenu() {
-        menuBackgroundView.isHidden = true
+//        menuBackgroundView.isHidden = true
+        taskEditorButton.backgroundColor = .appBlack
     }
 
     private func createContextMenu() -> UIMenu {
@@ -266,8 +235,9 @@ private extension TaskCell {
             title: "Редактировать",
             image: UIImage(systemName: "pencil")
         ) { [weak self] _ in
-            self?.hideMenu()
             guard let self else { return }
+            
+            self.hideMenu()
             self.delegate?.editTask(for: self)
         }
 
@@ -275,8 +245,9 @@ private extension TaskCell {
             title: "Поделиться",
             image: UIImage(systemName: "square.and.arrow.up")
         ) { [weak self] _ in
-            self?.hideMenu()
             guard let self else { return }
+            
+            self.hideMenu()
             self.delegate?.shareTask(for: self)
         }
         
@@ -285,8 +256,9 @@ private extension TaskCell {
             image: UIImage(systemName: "trash"),
             attributes: .destructive
         ) { [weak self] _ in
-            self?.hideMenu()
             guard let self else { return }
+            
+            self.hideMenu()
             self.delegate?.deleteTask(for: self)
         }
         
@@ -294,6 +266,7 @@ private extension TaskCell {
     }
 }
 
+///Mark: ContextMenu setup
 extension TaskCell: UIContextMenuInteractionDelegate {
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
@@ -305,3 +278,39 @@ extension TaskCell: UIContextMenuInteractionDelegate {
         hideMenu()
     }
 }
+
+//    private func setupMenuUI() {
+//        addSubview(menuBackgroundView)
+//
+//        // Переносим лейблы на menuBackgroundView когда активно
+//        menuBackgroundView.addSubview(titleLabel)
+//        menuBackgroundView.addSubview(descriptionLabel)
+//        menuBackgroundView.addSubview(dateLabel)
+//        menuBackgroundView.addSubview(checkMarkButton)
+//
+//        NSLayoutConstraint.activate([
+//            menuBackgroundView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+//            menuBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+//            menuBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            menuBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
+//
+//            // Констрейнты для лейблов внутри menuBackgroundView
+//            checkMarkButton.leadingAnchor.constraint(equalTo: menuBackgroundView.leadingAnchor, constant: 16),
+//            checkMarkButton.topAnchor.constraint(equalTo: menuBackgroundView.topAnchor, constant: 16),
+//            checkMarkButton.widthAnchor.constraint(equalToConstant: 24),
+//            checkMarkButton.heightAnchor.constraint(equalToConstant: 24),
+//
+//            titleLabel.leadingAnchor.constraint(equalTo: checkMarkButton.trailingAnchor, constant: 8),
+//            titleLabel.trailingAnchor.constraint(equalTo: menuBackgroundView.trailingAnchor, constant: -16),
+//            titleLabel.topAnchor.constraint(equalTo: menuBackgroundView.topAnchor, constant: 16),
+//
+//            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+//            descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+//            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
+//
+//            dateLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+//            dateLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+//            dateLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 4),
+//            dateLabel.bottomAnchor.constraint(lessThanOrEqualTo: menuBackgroundView.bottomAnchor, constant: -16)
+//        ])
+//    }
