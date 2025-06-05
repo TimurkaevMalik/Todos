@@ -12,8 +12,16 @@ extension UIFont {
         return UIFont.systemFont(ofSize: size, weight: weight)
     }
     
+    static func regular11() -> UIFont {
+        return customFont(weight: .regular, size: 11)
+    }
+    
     static func regular12() -> UIFont {
         return customFont(weight: .regular, size: 12)
+    }
+    
+    static func regular17() -> UIFont {
+        return customFont(weight: .regular, size: 17)
     }
     
     static func medium15() -> UIFont {

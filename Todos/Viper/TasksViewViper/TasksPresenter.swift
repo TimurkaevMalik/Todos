@@ -14,6 +14,8 @@ final class TasksPresenter {
     weak var view: TasksViewInput?
     
     private var tasks = [TaskDTO]()
+    private var visibleTasks = [TaskDTO]()
+    private var searchedText = ""
     
     init(interactor: TasksInteractorInput,
          router: TasksRouterInput) {
@@ -21,9 +23,31 @@ final class TasksPresenter {
         self.interactor = interactor
         self.router = router
     }
+    
+    private func filterTitles(by text: String) {
+        if !text.isEmpty {
+            visibleTasks = tasks.filter({
+                $0.title.lowercased().contains(text.lowercased())
+            })
+        } else {
+            visibleTasks = tasks
+        }
+    }
 }
 
 extension TasksPresenter: TasksViewOutput {
+    func deleteTask(at indexPath: IndexPath) {
+        print(indexPath)
+    }
+    
+    func editTask(at indexPath: IndexPath) {
+        print(indexPath)
+    }
+    
+    func viewDidLoad() {
+        interactor.fetchTasks()
+    }
+
     func didSelectRow(at indexPath: IndexPath) {
         if let task = tasks[safe: indexPath.row] {
             router.showTaskDetail(for: task)
@@ -31,32 +55,30 @@ extension TasksPresenter: TasksViewOutput {
     }
     
     func task(at indexPath: IndexPath) -> TaskDTO? {
-        tasks[safe: indexPath.row]
+        visibleTasks[safe: indexPath.row]
     }
     
     func numberOfTasks() -> Int {
-        print(tasks.count)
-        return tasks.count
+        return visibleTasks.count
     }
-    
-    func viewDidLoad() {
-        interactor.fetchTasks()
+        
+    func didSearchText(_ text: String) {
+        searchedText = text
+        
+        filterTitles(by: searchedText)
+        view?.showTasks()
     }
 }
 
 extension TasksPresenter: TasksInteractorOutput {
     func didReceiveTasks(_ tasks: [TaskDTO]) {
         self.tasks = tasks
-        view?.showTasks(tasks)
+        
+        filterTitles(by: searchedText)
+        view?.showTasks()
     }
     
     func tasksFetchFailed(_ error: any Error) {
         print(error)
-    }
-}
-
-extension Array {
-    subscript(safe index: Index) -> Element? {
-        indices.contains(index) ? self[index] : nil
     }
 }

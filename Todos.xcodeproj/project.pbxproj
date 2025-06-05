@@ -16,6 +16,9 @@
 		BCA38B222DF0D27D0009417F /* TaskDetailModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B212DF0D27D0009417F /* TaskDetailModuleBuilder.swift */; };
 		BCA38B242DF0D2A20009417F /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B232DF0D2A20009417F /* TaskDetailView.swift */; };
 		BCA38B262DF0D7460009417F /* TaskDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B252DF0D7460009417F /* TaskDetailPresenter.swift */; };
+		BCA38B2A2DF1B26F0009417F /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B292DF1B26F0009417F /* Array.swift */; };
+		BCA38B2F2DF1C6DF0009417F /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B2E2DF1C6D80009417F /* Cache.swift */; };
+		BCA38B312DF1C7CD0009417F /* CustomDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B302DF1C7C20009417F /* CustomDateFormatter.swift */; };
 		BCCBD8142DEDE7F8000EFC99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD80A2DEDE7F8000EFC99 /* AppDelegate.swift */; };
 		BCCBD8152DEDE7F8000EFC99 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8112DEDE7F8000EFC99 /* SceneDelegate.swift */; };
 		BCCBD8162DEDE7F8000EFC99 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8122DEDE7F8000EFC99 /* TasksView.swift */; };
@@ -66,6 +69,9 @@
 		BCA38B212DF0D27D0009417F /* TaskDetailModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailModuleBuilder.swift; sourceTree = "<group>"; };
 		BCA38B232DF0D2A20009417F /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 		BCA38B252DF0D7460009417F /* TaskDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailPresenter.swift; sourceTree = "<group>"; };
+		BCA38B292DF1B26F0009417F /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		BCA38B2E2DF1C6D80009417F /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		BCA38B302DF1C7C20009417F /* CustomDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDateFormatter.swift; sourceTree = "<group>"; };
 		BCCBD7D62DEDE7E9000EFC99 /* Todos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCBD7EC2DEDE7EB000EFC99 /* TodosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCBD7F62DEDE7EB000EFC99 /* TodosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,14 +124,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BCA38B272DF0D76E0009417F /* TaskDetail */ = {
+		BCA38B272DF0D76E0009417F /* TaskDetailViper */ = {
 			isa = PBXGroup;
 			children = (
 				BCA38B212DF0D27D0009417F /* TaskDetailModuleBuilder.swift */,
 				BCA38B252DF0D7460009417F /* TaskDetailPresenter.swift */,
 				BCA38B232DF0D2A20009417F /* TaskDetailView.swift */,
 			);
-			path = TaskDetail;
+			path = TaskDetailViper;
+			sourceTree = "<group>";
+		};
+		BCA38B282DF198510009417F /* TasksViewViper */ = {
+			isa = PBXGroup;
+			children = (
+				BCA38B1F2DF0B9C60009417F /* TasksModuleBuilder.swift */,
+				BCA38B1D2DF07CFF0009417F /* TasksRouter.swift */,
+				BCA38B1B2DF07AC10009417F /* TasksInteractor.swift */,
+				BCA38B192DF05AF20009417F /* TasksPresenter.swift */,
+				BCCBD8122DEDE7F8000EFC99 /* TasksView.swift */,
+			);
+			path = TasksViewViper;
+			sourceTree = "<group>";
+		};
+		BCA38B2D2DF1C6D10009417F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BCA38B2E2DF1C6D80009417F /* Cache.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		BCCBD7CD2DEDE7E9000EFC99 = {
@@ -151,6 +177,7 @@
 		BCCBD8132DEDE7F8000EFC99 /* Todos */ = {
 			isa = PBXGroup;
 			children = (
+				BCA38B2D2DF1C6D10009417F /* Helpers */,
 				BCCBD8462DEE31ED000EFC99 /* CustomViews */,
 				BCCBD8302DEDFF5F000EFC99 /* Extensions */,
 				BCCBD82B2DEDF3C0000EFC99 /* Models */,
@@ -185,12 +212,8 @@
 		BCCBD8232DEDE899000EFC99 /* Viper */ = {
 			isa = PBXGroup;
 			children = (
-				BCA38B272DF0D76E0009417F /* TaskDetail */,
-				BCA38B1F2DF0B9C60009417F /* TasksModuleBuilder.swift */,
-				BCA38B1D2DF07CFF0009417F /* TasksRouter.swift */,
-				BCA38B1B2DF07AC10009417F /* TasksInteractor.swift */,
-				BCA38B192DF05AF20009417F /* TasksPresenter.swift */,
-				BCCBD8122DEDE7F8000EFC99 /* TasksView.swift */,
+				BCA38B282DF198510009417F /* TasksViewViper */,
+				BCA38B272DF0D76E0009417F /* TaskDetailViper */,
 			);
 			path = Viper;
 			sourceTree = "<group>";
@@ -198,6 +221,7 @@
 		BCCBD8242DEDED9C000EFC99 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				BCA38B302DF1C7C20009417F /* CustomDateFormatter.swift */,
 				BCCBD83C2DEE17D2000EFC99 /* NetworkService */,
 				BCCBD8352DEE0746000EFC99 /* ServiceError */,
 				BCCBD8252DEDEDA7000EFC99 /* TaskCoreData */,
@@ -227,6 +251,7 @@
 		BCCBD8302DEDFF5F000EFC99 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				BCA38B292DF1B26F0009417F /* Array.swift */,
 				BCA38B172DEF22F70009417F /* String.swift */,
 				BCA38B152DEF12B20009417F /* UIFont.swift */,
 				BCCBD8312DEDFF6A000EFC99 /* TaskCD.swift */,
@@ -417,6 +442,7 @@
 				BCCBD8482DEE31FB000EFC99 /* TaskCell.swift in Sources */,
 				BCCBD84A2DEE3322000EFC99 /* CheckMarkButton.swift in Sources */,
 				BCA38B182DEF22F70009417F /* String.swift in Sources */,
+				BCA38B2F2DF1C6DF0009417F /* Cache.swift in Sources */,
 				BCCBD8142DEDE7F8000EFC99 /* AppDelegate.swift in Sources */,
 				BCA38B262DF0D7460009417F /* TaskDetailPresenter.swift in Sources */,
 				BCCBD8412DEE184C000EFC99 /* HttpMethod.swift in Sources */,
@@ -430,7 +456,9 @@
 				BCA38B1A2DF05B020009417F /* TasksPresenter.swift in Sources */,
 				BCCBD8162DEDE7F8000EFC99 /* TasksView.swift in Sources */,
 				BCCBD8432DEE1B29000EFC99 /* NetworkServiceTasks.swift in Sources */,
+				BCA38B2A2DF1B26F0009417F /* Array.swift in Sources */,
 				BCA38B1E2DF07D040009417F /* TasksRouter.swift in Sources */,
+				BCA38B312DF1C7CD0009417F /* CustomDateFormatter.swift in Sources */,
 				BCCBD8342DEE0149000EFC99 /* TaskModelContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,8 +519,9 @@
 				INFOPLIST_FILE = Todos/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -500,9 +529,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.practicum.Timurkaev.Todos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -518,8 +551,9 @@
 				INFOPLIST_FILE = Todos/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -527,9 +561,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.practicum.Timurkaev.Todos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

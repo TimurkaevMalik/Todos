@@ -8,8 +8,11 @@
 import UIKit
 
 typealias EntryPoint = TasksViewInput & UIViewController
+
 final class TasksModuleBuilder {
+    
     static func build() -> EntryPoint {
+        
         let view = TasksView()
         let router = TasksRouter()
         router.viewController = view

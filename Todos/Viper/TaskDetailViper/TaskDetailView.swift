@@ -31,9 +31,9 @@ final class TaskDetailView: UIViewController, TaskDetailViewInput {
     }
     
     private func setupUI() {
-        view.backgroundColor = .white
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .appBlack
         view.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),

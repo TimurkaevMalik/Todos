@@ -18,7 +18,6 @@ final class TasksRouter: TasksRouterInput {
     func showTaskDetail(for task: TaskDTO) {
         
         guard let viewController else { return }
-        print(viewController)
         let detailVC = TaskDetailModuleBuilder.build(with: task)
         viewController.navigationController?.pushViewController(detailVC,
                                                                 animated: true)
