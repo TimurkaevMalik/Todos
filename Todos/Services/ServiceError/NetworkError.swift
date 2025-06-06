@@ -12,7 +12,7 @@ enum NetworkError: Error {
     case decodingFailed(_ code: Int)
     case serverError(Int)
     
-    var localizedDescription: String {
+    var message: String {
         switch self {
         case .invalidURL: 
             return "Invalid URL"

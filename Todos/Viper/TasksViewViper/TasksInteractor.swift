@@ -13,7 +13,7 @@ protocol TasksInteractorInput {
 }
 protocol TasksInteractorOutput: AnyObject {
     func didReceiveTasks(_ tasks: [TaskDTO])
-    func tasksFetchFailed(_ error: Error)
+    func tasksFetchFailed(_ error: NetworkError)
 }
 
 final class TasksInteractor: TasksInteractorInput {

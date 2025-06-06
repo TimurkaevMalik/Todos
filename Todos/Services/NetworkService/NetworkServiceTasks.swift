@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NetworkServiceTasksProtocol {
-    func fetchTasks(_ completion: @escaping (Result<[TaskDTO], Error>) -> Void)
+    func fetchTasks(_ completion: @escaping (Result<[TaskDTO], NetworkError>) -> Void)
 }
 
 final class NetworkServiceTasks: NetworkServiceTasksProtocol {
@@ -25,7 +25,7 @@ final class NetworkServiceTasks: NetworkServiceTasksProtocol {
         self.decoder = decoder
     }
     
-    func fetchTasks(_ completion: @escaping (Result<[TaskDTO], Error>) -> Void) {
+    func fetchTasks(_ completion: @escaping (Result<[TaskDTO], NetworkError>) -> Void) {
         
         if activeTask != nil {
             activeTask?.cancel()
@@ -47,9 +47,9 @@ final class NetworkServiceTasks: NetworkServiceTasksProtocol {
                 self.activeTask = nil
             }
             
-            if let error = error {
+            if let error = error as? NSError {
                 DispatchQueue.main.async {
-                    completion(.failure(error))
+                    completion(.failure(.serverError(error.code)))
                 }
                 return
             }

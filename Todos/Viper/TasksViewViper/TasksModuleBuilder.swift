@@ -15,7 +15,6 @@ final class TasksModuleBuilder {
         
         let view = TasksView()
         let router = TasksRouter()
-        router.viewController = view
         
         let networkService = NetworkServiceTasks()
         let dataBase = TaskServiceCD(coreDataStack: TaskModelContainer.shared)
@@ -29,6 +28,8 @@ final class TasksModuleBuilder {
         view.presenter = presenter
         interactor.presenter = presenter
         presenter.view = view
+        router.presenter = presenter
+        router.viewController = view
         
         return view
     }

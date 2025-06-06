@@ -80,7 +80,13 @@ extension TasksPresenter: TasksInteractorOutput {
         view?.showTasks()
     }
     
-    func tasksFetchFailed(_ error: any Error) {
-        print(error)
+    func tasksFetchFailed(_ error: NetworkError) {
+        router.showErrorAlert(with: error)
+    }
+}
+
+extension TasksPresenter: TasksRouterOutput {
+    func retryTasksRequest() {
+        interactor.fetchTasks()
     }
 }
