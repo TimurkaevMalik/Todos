@@ -41,17 +41,19 @@ extension TasksPresenter: TasksViewOutput {
     }
     
     func editTask(at indexPath: IndexPath) {
-        print(indexPath)
+        if let task = tasks[safe: indexPath.row] {
+            router.showTaskDetail(for: task)
+        }
     }
     
     func viewDidLoad() {
         interactor.fetchTasks()
     }
 
-    func didSelectRow(at indexPath: IndexPath) {
-        if let task = tasks[safe: indexPath.row] {
-            router.showTaskDetail(for: task)
-        }
+    func shareTask(at indexPath: IndexPath) {
+        guard let task = visibleTasks[safe: indexPath.row] else { return }
+        let textToShare = "Задача: \(task.title)\nОписание: \(task.todo)"
+        view?.showShareMenu(for: textToShare)
     }
     
     func task(at indexPath: IndexPath) -> TaskDTO? {

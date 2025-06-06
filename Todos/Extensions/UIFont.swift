@@ -20,11 +20,19 @@ extension UIFont {
         return customFont(weight: .regular, size: 12)
     }
     
+    static func regular16() -> UIFont {
+        return customFont(weight: .regular, size: 16)
+    }
+    
     static func regular17() -> UIFont {
         return customFont(weight: .regular, size: 17)
     }
     
     static func medium15() -> UIFont {
         return customFont(weight: .medium, size: 15)
+    }
+    
+    static func bold34() -> UIFont {
+        return customFont(weight: .bold, size: 34)
     }
 }

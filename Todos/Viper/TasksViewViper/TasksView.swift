@@ -11,15 +11,19 @@ protocol TasksViewInput: AnyObject {
     var presenter: TasksViewOutput? { get set }
     
     func showTasks()
+    func showShareMenu(for text: String)
 }
 
 protocol TasksViewOutput {
     func viewDidLoad()
-    func didSelectRow(at indexPath: IndexPath)
+    
     func deleteTask(at indexPath: IndexPath)
+    func shareTask(at indexPath: IndexPath)
     func editTask(at indexPath: IndexPath)
+    
     func task(at indexPath: IndexPath) -> TaskDTO?
     func numberOfTasks() -> Int
+    
     func didSearchText(_ text: String)
 }
 
@@ -41,7 +45,7 @@ final class TasksView: UIViewController, TasksViewInput {
         var config = UIButton.Configuration.filled()
         config.image = UIImage(systemName: "square.and.pencil")
         config.baseForegroundColor = .appYellow
-        config.baseBackgroundColor = .appGray
+        config.baseBackgroundColor = .appGrayDark
         
         let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +65,6 @@ final class TasksView: UIViewController, TasksViewInput {
         uiView.showsVerticalScrollIndicator = false
         uiView.backgroundColor = .appBlack
         uiView.dataSource = self
-//        uiView.delegate = self
         uiView.register(TaskCell.self, forCellReuseIdentifier: TaskCell.identifier)
         
         return uiView
@@ -86,11 +89,27 @@ final class TasksView: UIViewController, TasksViewInput {
         tableView.reloadData()
     }
     
+    func showShareMenu(for text: String) {
+        let activityVC = UIActivityViewController(
+            activityItems: [text],
+            applicationActivities: nil
+        )
+        present(activityVC, animated: true)
+    }
+    
     private func setTextForTasksAmountLabel(_ amount: Int) {
         if amount == 0 {
             tasksAmountLabel.text = "Нет задач"
         } else {
             tasksAmountLabel.text = "\(amount) Задач"
+        }
+    }
+    
+    private func setEdgeInsets(for row: Int) -> UIEdgeInsets {
+        if row != presenter?.numberOfTasks() {
+            UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        } else {
+            UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         }
     }
 }
@@ -99,22 +118,24 @@ final class TasksView: UIViewController, TasksViewInput {
 
 extension TasksView: TaskCellDelegate {
     func deleteTask(for cell: TaskCell) {
-        
-    }
-    
-    func shareTask(for cell: TaskCell) {
-        
-    }
-    
-    func editTask(for cell: TaskCell) {
-        
-    }
-    
-    func showTaskDetails(for cell: TaskCell) {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
-        presenter?.didSelectRow(at: indexPath)
+        presenter?.deleteTask(at: indexPath)
+    }
+    
+    func shareTask(for cell: TaskCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        presenter?.shareTask(at: indexPath)
+    }
+    
+    func editTask(for cell: TaskCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        presenter?.editTask(at: indexPath)
     }
     
     func shouldSetTaskAsDone(for cell: TaskCell) -> Bool {
@@ -154,73 +175,6 @@ extension TasksView: UITableViewDataSource {
         
         return cell
     }
-    
-    func setEdgeInsets(for row: Int) -> UIEdgeInsets {
-        if row != presenter?.numberOfTasks() {
-            UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        } else {
-            UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
-        }
-    }
-}
-
-extension TasksView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        return UIContextMenuConfiguration(
-            identifier: nil,
-            previewProvider: nil
-        ) { [weak self] _ in
-            guard let self = self,
-                  let task = self.presenter?.task(at: indexPath) else { return nil }
-            
-            return self.createContextMenu(for: task, at: indexPath)
-        }
-    }
-    
-    private func createContextMenu(for task: TaskDTO, at indexPath: IndexPath) -> UIMenu {
-        // 1. Действие "Редактировать"
-        let editAction = UIAction(
-            title: "Редактировать",
-            image: UIImage(systemName: "pencil"),
-            identifier: nil
-        ) { [weak self] _ in
-            self?.presenter?.editTask(at: indexPath)
-        }
-        
-        // 2. Действие "Поделиться"
-        let shareAction = UIAction(
-            title: "Поделиться",
-            image: UIImage(systemName: "square.and.arrow.up"),
-            identifier: nil
-        ) { [weak self] _ in
-            self?.shareTask(task)
-        }
-        
-        // 3. Действие "Удалить"
-        let deleteAction = UIAction(
-            title: "Удалить",
-            image: UIImage(systemName: "trash"),
-            identifier: nil,
-            attributes: .destructive
-        ) { [weak self] _ in
-            self?.presenter?.deleteTask(at: indexPath)
-        }
-        
-        // Собираем меню
-        return UIMenu(
-            title: task.title,
-            children: [editAction, shareAction, deleteAction]
-        )
-    }
-    
-    private func shareTask(_ task: TaskDTO) {
-        let textToShare = "Задача: \(task.title)\nОписание: \(task.todo)"
-        let activityVC = UIActivityViewController(
-            activityItems: [textToShare],
-            applicationActivities: nil
-        )
-        present(activityVC, animated: true)
-    }
 }
 
 private extension TasksView {
@@ -229,20 +183,23 @@ private extension TasksView {
         configureNavController()
         
         bottomBarContainer.translatesAutoresizingMaskIntoConstraints = false
-        bottomBarContainer.backgroundColor = .appGray
+        bottomBarContainer.backgroundColor = .appGrayDark
+        
+        tableView.contentInset = UIEdgeInsets(top: 0,
+                                              left: .defaultMargin,
+                                              bottom: 0,
+                                              right: .defaultMargin)
         
         view.addSubview(tableView)
         view.addSubview(bottomBarContainer)
         view.addSubview(editButton)
         view.addSubview(tasksAmountLabel)
-        
-        let horizontalSpacing: CGFloat = 20
-        
+                
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalSpacing),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalSpacing),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             bottomBarContainer.heightAnchor.constraint(equalToConstant: 84),
             bottomBarContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -267,24 +224,21 @@ private extension TasksView {
     
     private func configureSearchController(){
         searchController.searchResultsUpdater = self
-        let placeHolder = NSLocalizedString("searchBar.placeholder", comment: "Text displayed inside of searchBar as placeholder")
         
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.appGray,
             .font: UIFont.regular17()
         ]
         
-        let atributedString = NSMutableAttributedString(string: placeHolder,
+        let atributedString = NSMutableAttributedString(string: "Search",
                                                         attributes: attributes)
-        
         
         searchController.searchBar.searchTextField.attributedPlaceholder = atributedString
         searchController.searchBar.searchTextField.leftView?.tintColor = .appGray
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.searchBarStyle = .prominent
+        searchController.searchBar.searchTextField.backgroundColor = .appGrayDark
+        searchController.searchBar.barStyle = .black
         searchController.searchBar.layer.cornerRadius = 10
         searchController.searchBar.layer.masksToBounds = true
-        searchController.searchBar.isTranslucent = false
         
         navigationItem.searchController = searchController
     }

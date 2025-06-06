@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC4D01922DF33E0B00CCFCCE /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01912DF33E0B00CCFCCE /* CGFloat.swift */; };
+		BC4D01942DF33EBF00CCFCCE /* TaskdetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01932DF33EB800CCFCCE /* TaskdetailInteractor.swift */; };
 		BCA38B162DEF12B60009417F /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B152DEF12B20009417F /* UIFont.swift */; };
 		BCA38B182DEF22F70009417F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B172DEF22F70009417F /* String.swift */; };
 		BCA38B1A2DF05B020009417F /* TasksPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B192DF05AF20009417F /* TasksPresenter.swift */; };
@@ -60,6 +62,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BC4D01912DF33E0B00CCFCCE /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
+		BC4D01932DF33EB800CCFCCE /* TaskdetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskdetailInteractor.swift; sourceTree = "<group>"; };
 		BCA38B152DEF12B20009417F /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		BCA38B172DEF22F70009417F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BCA38B192DF05AF20009417F /* TasksPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksPresenter.swift; sourceTree = "<group>"; };
@@ -128,8 +132,9 @@
 			isa = PBXGroup;
 			children = (
 				BCA38B212DF0D27D0009417F /* TaskDetailModuleBuilder.swift */,
-				BCA38B252DF0D7460009417F /* TaskDetailPresenter.swift */,
 				BCA38B232DF0D2A20009417F /* TaskDetailView.swift */,
+				BCA38B252DF0D7460009417F /* TaskDetailPresenter.swift */,
+				BC4D01932DF33EB800CCFCCE /* TaskdetailInteractor.swift */,
 			);
 			path = TaskDetailViper;
 			sourceTree = "<group>";
@@ -138,10 +143,9 @@
 			isa = PBXGroup;
 			children = (
 				BCA38B1F2DF0B9C60009417F /* TasksModuleBuilder.swift */,
-				BCA38B1D2DF07CFF0009417F /* TasksRouter.swift */,
-				BCA38B1B2DF07AC10009417F /* TasksInteractor.swift */,
-				BCA38B192DF05AF20009417F /* TasksPresenter.swift */,
 				BCCBD8122DEDE7F8000EFC99 /* TasksView.swift */,
+				BCA38B192DF05AF20009417F /* TasksPresenter.swift */,
+				BCA38B1B2DF07AC10009417F /* TasksInteractor.swift */,
 			);
 			path = TasksViewViper;
 			sourceTree = "<group>";
@@ -212,6 +216,7 @@
 		BCCBD8232DEDE899000EFC99 /* Viper */ = {
 			isa = PBXGroup;
 			children = (
+				BCA38B1D2DF07CFF0009417F /* TasksRouter.swift */,
 				BCA38B282DF198510009417F /* TasksViewViper */,
 				BCA38B272DF0D76E0009417F /* TaskDetailViper */,
 			);
@@ -251,6 +256,7 @@
 		BCCBD8302DEDFF5F000EFC99 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				BC4D01912DF33E0B00CCFCCE /* CGFloat.swift */,
 				BCA38B292DF1B26F0009417F /* Array.swift */,
 				BCA38B172DEF22F70009417F /* String.swift */,
 				BCA38B152DEF12B20009417F /* UIFont.swift */,
@@ -437,12 +443,14 @@
 				BCA38B162DEF12B60009417F /* UIFont.swift in Sources */,
 				BCCBD8452DEE2108000EFC99 /* NetworkError.swift in Sources */,
 				BCCBD82F2DEDF55D000EFC99 /* TaskServiceCD.swift in Sources */,
+				BC4D01922DF33E0B00CCFCCE /* CGFloat.swift in Sources */,
 				BCA38B242DF0D2A20009417F /* TaskDetailView.swift in Sources */,
 				BCCBD8322DEDFF6A000EFC99 /* TaskCD.swift in Sources */,
 				BCCBD8482DEE31FB000EFC99 /* TaskCell.swift in Sources */,
 				BCCBD84A2DEE3322000EFC99 /* CheckMarkButton.swift in Sources */,
 				BCA38B182DEF22F70009417F /* String.swift in Sources */,
 				BCA38B2F2DF1C6DF0009417F /* Cache.swift in Sources */,
+				BC4D01942DF33EBF00CCFCCE /* TaskdetailInteractor.swift in Sources */,
 				BCCBD8142DEDE7F8000EFC99 /* AppDelegate.swift in Sources */,
 				BCA38B262DF0D7460009417F /* TaskDetailPresenter.swift in Sources */,
 				BCCBD8412DEE184C000EFC99 /* HttpMethod.swift in Sources */,
