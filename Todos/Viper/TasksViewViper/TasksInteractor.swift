@@ -62,10 +62,18 @@ final class TasksInteractor: TasksInteractorInput {
             
             switch result {
             case .success(let tasks):
-                self.presenter?.didReceiveTasks(tasks)
+                
+                if !tasks.isEmpty {
+                    self.presenter?.didReceiveTasks(tasks)
+                    self.saveTasks(tasks)
+                }
             case .failure(let failure):
                 self.presenter?.tasksFetchFailed(failure)
             }
         }
+    }
+    
+    private func saveTasks(_ tasks: [TaskDTO]) {
+        dataBaseService.createTasks(tasks) { _ in }
     }
 }

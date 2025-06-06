@@ -8,11 +8,15 @@
 import Foundation
 
 enum ServiceError: Error {
+    case taskAlreadyExists
     case operation(_ type: ServiceOperation,
                    code: String = "uknown")
     
     public var message: String {
         switch self {
+            
+        case .taskAlreadyExists:
+            "Task already exists"
             
         case .operation(let type, let code):
             "Task \(type.rawValue) operation failed. Error: \(code)"
