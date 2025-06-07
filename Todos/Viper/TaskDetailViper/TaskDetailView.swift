@@ -14,14 +14,13 @@ protocol TaskDetailViewInput: AnyObject {
 
 protocol TaskDetailViewOutput: AnyObject {
     func viewDidLoad()
+    func updateTask(title: String, description: String)
 }
 
 import UIKit
 
 final class TaskDetailView: UIViewController, TaskDetailViewInput {
     var presenter: TaskDetailViewOutput?
-    
-    private var taskTitle: String = ""
     
     private lazy var titleTextField: UITextField = {
         let textField = UITextField()
@@ -63,18 +62,27 @@ final class TaskDetailView: UIViewController, TaskDetailViewInput {
         setupToolBar()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        let title = convertToValidText(titleTextField.text ?? "")
+        let description = convertToValidText(descriptionTextView.text ?? "")
+        
+        presenter?.updateTask(title: title, description: description)
+    }
+    
     func showTask(_ task: TaskDTO) {
         titleTextField.text = task.title
         descriptionTextView.text = task.todo
         dateLabel.text = CustomDateFormatter.shared.string(from: task.createdAt)
     }
     
-    private func assignValidTitle(_ text: String) {
+    private func convertToValidText(_ text: String) -> String {
         
         if !text.filter({ $0 != Character(" ") }).isEmpty {
-            taskTitle = text.trimmingCharacters(in: .whitespaces)
+            text.trimmingCharacters(in: .whitespaces)
         } else {
-            taskTitle = ""
+            ""
         }
     }
         
@@ -96,8 +104,6 @@ extension TaskDetailView: UITextFieldDelegate {
         guard newString.count <= maxLength else {
             return false
         }
-        
-        assignValidTitle(newString)
         
         return true
     }

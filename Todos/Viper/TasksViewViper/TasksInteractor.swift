@@ -10,6 +10,8 @@ import Foundation
 protocol TasksInteractorInput {
     var presenter: TasksInteractorOutput? { get set }
     func fetchTasks()
+    func deleteTask(_ id: UUID)
+    func updateTask(_ task: TaskDTO)
 }
 protocol TasksInteractorOutput: AnyObject {
     func didReceiveTasks(_ tasks: [TaskDTO])
@@ -19,7 +21,7 @@ protocol TasksInteractorOutput: AnyObject {
 final class TasksInteractor: TasksInteractorInput {
     
     weak var presenter: TasksInteractorOutput?
-        
+    
     private let networkService: NetworkServiceTasksProtocol
     private let dataBaseService: TaskDataBaseServiceProtocol
     
@@ -74,6 +76,38 @@ final class TasksInteractor: TasksInteractorInput {
     }
     
     private func saveTasks(_ tasks: [TaskDTO]) {
-        dataBaseService.createTasks(tasks) { _ in }
+        dataBaseService.createTasks(tasks) { result in
+            
+            switch result {
+            case .success:
+                break
+            case .failure(let failure):
+                assertionFailure(failure.message)
+            }
+        }
+    }
+    
+    func updateTask(_ task: TaskDTO) {
+        dataBaseService.updateTask(task) { result in
+            
+            switch result {
+            case .success:
+                break
+            case .failure(let failure):
+                assertionFailure(failure.message)
+            }
+        }
+    }
+    
+    func deleteTask(_ id: UUID) {
+        dataBaseService.deleteTask(by: id) { result in
+            
+            switch result {
+            case .success:
+                break
+            case .failure(let failure):
+                assertionFailure(failure.message)
+            }
+        }
     }
 }

@@ -17,7 +17,7 @@ final class TasksModuleBuilder {
         let router = TasksRouter()
         
         let networkService = NetworkServiceTasks()
-        let dataBase = TaskServiceCD(coreDataStack: TaskModelContainer.shared)
+        let dataBase = TaskServiceCD()
         let interactor = TasksInteractor(networkService: networkService,
                                          dataBaseService: dataBase)
         

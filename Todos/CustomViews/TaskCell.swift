@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TaskCellDelegate: AnyObject {
-    func shouldSetTaskAsDone(for cell: TaskCell) -> Bool
+    func shouldSetTaskAsDone(for cell: TaskCell)
     func deleteTask(for cell: TaskCell)
     func shareTask(for cell: TaskCell)
     func editTask(for cell: TaskCell)
@@ -59,24 +59,27 @@ final class TaskCell: UITableViewCell {
         label.font = .regular12()
         return label
     }()
-        
+      
+    
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         addInteraction(UIContextMenuInteraction(delegate: self))
         setupCell()
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        willHideMenu()
+        setupActions()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        willHideMenu()
+    }
+        
     func configureCell(with task: TaskDTO, delegate: TaskCellDelegate) {
         self.delegate = delegate
         
@@ -102,9 +105,7 @@ final class TaskCell: UITableViewCell {
     
     private func toggleTaskCompletion() {
         guard let delegate else { return }
-        
-        let isCompleted = delegate.shouldSetTaskAsDone(for: self)
-        configureViews(by: isCompleted)
+        delegate.shouldSetTaskAsDone(for: self)
     }
 }
 
@@ -113,7 +114,7 @@ private extension TaskCell {
     func setupCell() {
         contentView.isUserInteractionEnabled = false
         selectionStyle = .none
-        backgroundColor = .appBlack
+        backgroundColor = .green
         
         addSubview(checkMarkButton)
         addSubview(titleLabel)
@@ -159,11 +160,10 @@ private extension TaskCell {
                 self.toggleTaskCompletion()
             },
             for: .touchUpInside)
-
     }
 }
 
-///Mark: ContextMenu setup
+// MARK: - ContextMenu setup
 private extension TaskCell {
     private func willShowMenu() {
         checkMarkButton.isHidden = true
@@ -229,7 +229,7 @@ private extension TaskCell {
     }
 }
 
-///Mark: ContextMenu setup
+// MARK: - ContextMenu setup
 extension TaskCell: UIContextMenuInteractionDelegate {
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         

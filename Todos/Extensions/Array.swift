@@ -11,4 +11,10 @@ extension Array {
     subscript(safe index: Index) -> Element? {
         indices.contains(index) ? self[index] : nil
     }
+    
+    mutating func safeRemove(at index: Index) {
+        if indices.contains(index) {
+            remove(at: index)
+        }
+    }
 }

@@ -8,11 +8,17 @@
 import UIKit
 
 final class TaskDetailModuleBuilder {
-    static func build(with task: TaskDTO) -> UIViewController {
+    static func build(with task: TaskDTO, delegate: TaskDetailModuleDelegate) -> UIViewController {
         let view = TaskDetailView()
-        let presenter = TaskDetailPresenter(task: task)
+        let interactor = TaskDetailInteractor(dataBase: TaskServiceCD())
+        let presenter = TaskDetailPresenter(task: task,
+                                            interactor: interactor,
+                                            delegate: delegate)
+        
         view.presenter = presenter
         presenter.view = view
+        interactor.presenter = presenter
+        
         return view
     }
 }

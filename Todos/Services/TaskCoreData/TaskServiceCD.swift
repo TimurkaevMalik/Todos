@@ -9,9 +9,6 @@
 import CoreData
 
 protocol TaskDataBaseServiceProtocol {
-    func createTask(_ task: TaskDTO,
-                    completion: @escaping (Result<TaskDTO, ServiceError>) -> Void)
-    
     func createTasks(_ tasks: [TaskDTO],
                     completion: @escaping (Result<Void, ServiceError>) -> Void)
     
@@ -30,52 +27,11 @@ final class TaskServiceCD: TaskDataBaseServiceProtocol {
     private let serialQueue = DispatchQueue(label: "TaskServiceCD.queue",
                                             qos: .userInitiated)
     
-    init(coreDataStack: AnyTaskModelContainer) {
-        self.coreDataStack = coreDataStack
+    init() {
+        self.coreDataStack = TaskModelContainer.shared
     }
     
     // MARK: - Create
-    func createTask(_ task: TaskDTO, completion: @escaping (Result<TaskDTO, ServiceError>) -> Void) {
-        
-        serialQueue.async {
-            let backgroundContext = self.coreDataStack.newBackgroundContext()
-            
-            backgroundContext.performAndWait {
-                do {
-                    let request: NSFetchRequest<TaskCD> = TaskCD.fetchRequest()
-                    request.predicate = NSPredicate(format: "id == %@", task.id as CVarArg)
-                    
-                    
-                    if try backgroundContext.count(for: request) > 0 {
-                        completion(.failure(.taskAlreadyExists))
-                        return
-                    }
-                        
-                    let taskCD = TaskCD(context: backgroundContext)
-                    taskCD.updateFrom(taskDTO: task)
-//                    taskCD.id = task.id
-//                    taskCD.createdAt = task.createdAt
-//                    taskCD.title = task.title
-//                    taskCD.todo = task.todo
-//                    taskCD.isCompleted = task.isCompleted
-                    
-                    try backgroundContext.save()
-                    
-                    DispatchQueue.main.async {
-                        completion(.success(task))
-                    }
-                } catch let error as NSError {
-                    DispatchQueue.main.async {
-                        
-                        completion(.failure(
-                            .operation(.insertion,
-                                       code: "\(error.code)")))
-                    }
-                }
-            }
-        }
-    }
-    
     func createTasks(_ tasks: [TaskDTO], completion: @escaping (Result<Void, ServiceError>) -> Void) {
         serialQueue.async {
             let backgroundContext = self.coreDataStack.newBackgroundContext()

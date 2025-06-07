@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BC4D01922DF33E0B00CCFCCE /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01912DF33E0B00CCFCCE /* CGFloat.swift */; };
-		BC4D01942DF33EBF00CCFCCE /* TaskdetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01932DF33EB800CCFCCE /* TaskdetailInteractor.swift */; };
+		BC4D01942DF33EBF00CCFCCE /* TaskDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01932DF33EB800CCFCCE /* TaskDetailInteractor.swift */; };
 		BCA38B162DEF12B60009417F /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B152DEF12B20009417F /* UIFont.swift */; };
 		BCA38B182DEF22F70009417F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B172DEF22F70009417F /* String.swift */; };
 		BCA38B1A2DF05B020009417F /* TasksPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B192DF05AF20009417F /* TasksPresenter.swift */; };
@@ -63,7 +63,7 @@
 
 /* Begin PBXFileReference section */
 		BC4D01912DF33E0B00CCFCCE /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
-		BC4D01932DF33EB800CCFCCE /* TaskdetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskdetailInteractor.swift; sourceTree = "<group>"; };
+		BC4D01932DF33EB800CCFCCE /* TaskDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailInteractor.swift; sourceTree = "<group>"; };
 		BCA38B152DEF12B20009417F /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		BCA38B172DEF22F70009417F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BCA38B192DF05AF20009417F /* TasksPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksPresenter.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 				BCA38B212DF0D27D0009417F /* TaskDetailModuleBuilder.swift */,
 				BCA38B232DF0D2A20009417F /* TaskDetailView.swift */,
 				BCA38B252DF0D7460009417F /* TaskDetailPresenter.swift */,
-				BC4D01932DF33EB800CCFCCE /* TaskdetailInteractor.swift */,
+				BC4D01932DF33EB800CCFCCE /* TaskDetailInteractor.swift */,
 			);
 			path = TaskDetailViper;
 			sourceTree = "<group>";
@@ -450,7 +450,7 @@
 				BCCBD84A2DEE3322000EFC99 /* CheckMarkButton.swift in Sources */,
 				BCA38B182DEF22F70009417F /* String.swift in Sources */,
 				BCA38B2F2DF1C6DF0009417F /* Cache.swift in Sources */,
-				BC4D01942DF33EBF00CCFCCE /* TaskdetailInteractor.swift in Sources */,
+				BC4D01942DF33EBF00CCFCCE /* TaskDetailInteractor.swift in Sources */,
 				BCCBD8142DEDE7F8000EFC99 /* AppDelegate.swift in Sources */,
 				BCA38B262DF0D7460009417F /* TaskDetailPresenter.swift in Sources */,
 				BCCBD8412DEE184C000EFC99 /* HttpMethod.swift in Sources */,

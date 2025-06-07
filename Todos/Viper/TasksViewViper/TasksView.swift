@@ -10,13 +10,15 @@ import UIKit
 protocol TasksViewInput: AnyObject {
     var presenter: TasksViewOutput? { get set }
     
-    func showTasks()
+    func updateTasks()
+    func updateCell(at indexPath: IndexPath)
     func showShareMenu(for text: String)
 }
 
 protocol TasksViewOutput {
     func viewDidLoad()
     
+    func toggleTaskCompletion(at indexPath: IndexPath)
     func deleteTask(at indexPath: IndexPath)
     func shareTask(at indexPath: IndexPath)
     func editTask(at indexPath: IndexPath)
@@ -85,8 +87,12 @@ final class TasksView: UIViewController, TasksViewInput {
         presenter?.viewDidLoad()
     }
         
-    func showTasks() {
+    func updateTasks() {
         tableView.reloadData()
+    }
+    
+    func updateCell(at indexPath: IndexPath) {
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
     
     func showShareMenu(for text: String) {
@@ -114,8 +120,6 @@ final class TasksView: UIViewController, TasksViewInput {
     }
 }
 
-
-
 extension TasksView: TaskCellDelegate {
     func deleteTask(for cell: TaskCell) {
         guard let indexPath = tableView.indexPath(for: cell) else {
@@ -138,8 +142,11 @@ extension TasksView: TaskCellDelegate {
         presenter?.editTask(at: indexPath)
     }
     
-    func shouldSetTaskAsDone(for cell: TaskCell) -> Bool {
-        return true
+    func shouldSetTaskAsDone(for cell: TaskCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        presenter?.toggleTaskCompletion(at: indexPath)
     }
 }
 
@@ -171,6 +178,8 @@ extension TasksView: UITableViewDataSource {
         }
         
         cell.separatorInset = setEdgeInsets(for: indexPath.row)
+        cell.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        cell.preservesSuperviewLayoutMargins = false
         cell.configureCell(with: task, delegate: self)
         
         return cell
@@ -185,10 +194,11 @@ private extension TasksView {
         bottomBarContainer.translatesAutoresizingMaskIntoConstraints = false
         bottomBarContainer.backgroundColor = .appGrayDark
         
+        tableView.backgroundColor = .red
         tableView.contentInset = UIEdgeInsets(top: 0,
-                                              left: .defaultMargin,
+                                              left: 20,
                                               bottom: 0,
-                                              right: .defaultMargin)
+                                              right: -20)
         
         view.addSubview(tableView)
         view.addSubview(bottomBarContainer)

@@ -10,8 +10,8 @@ import UIKit
 protocol TasksRouterInput {
     var presenter: TasksRouterOutput? { get set }
     var viewController: UIViewController? { get set }
-    func showTaskDetail(for task: TaskDTO)
-    func showErrorAlert(with error: NetworkError)
+    func showTaskDetail(for task: TaskDTO, delegate: TaskDetailModuleDelegate)
+    func showErrorAlert(with error: String)
 }
 
 protocol TasksRouterOutput: AnyObject {
@@ -22,17 +22,20 @@ final class TasksRouter: TasksRouterInput {
     weak var presenter: TasksRouterOutput?
     weak var viewController: UIViewController?
     
-    func showTaskDetail(for task: TaskDTO) {
+    func showTaskDetail(for task: TaskDTO,
+                        delegate: TaskDetailModuleDelegate) {
         
         guard let viewController else { return }
-        let detailVC = TaskDetailModuleBuilder.build(with: task)
+        let detailVC = TaskDetailModuleBuilder.build(with: task,
+                                                     delegate: delegate)
+        
         viewController.navigationController?.pushViewController(detailVC,
                                                                 animated: true)
     }
     
-    func showErrorAlert(with error: NetworkError) {
+    func showErrorAlert(with error: String) {
         let alert = UIAlertController(title: "Could not load tasks",
-                                      message: error.message,
+                                      message: error,
                                       preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
