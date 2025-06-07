@@ -88,8 +88,10 @@ final class TaskCell: UITableViewCell {
         titleLabel.text = task.title
         descriptionLabel.text = task.todo
         dateLabel.text = CustomDateFormatter.shared.string(from: task.createdAt)
-        
         configureViews(by: task.isCompleted)
+        
+        ///descriptionLabel перекрывает dateLabel при первой загрузке ячейки. Этот метод решает проблему
+        dateLabel.layoutIfNeeded()
     }
     
     private func configureViews(by isCompleted: Bool) {
@@ -106,60 +108,6 @@ final class TaskCell: UITableViewCell {
     private func toggleTaskCompletion() {
         guard let delegate else { return }
         delegate.shouldSetTaskAsDone(for: self)
-    }
-}
-
-private extension TaskCell {
-    
-    func setupCell() {
-        contentView.isUserInteractionEnabled = false
-        selectionStyle = .none
-        backgroundColor = .green
-        
-        addSubview(checkMarkButton)
-        addSubview(titleLabel)
-        addSubview(descriptionLabel)
-        addSubview(dateLabel)
-        
-        let topAnchorConstant: CGFloat = 6
-        let verticalSpacing: CGFloat = 12
-                
-        let leftAnchor = titleLabel.leadingAnchor.constraint(equalTo: checkMarkButton.trailingAnchor, constant: 8)
-        let rightAnchor = titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
-           
-        leftAnchor.isActive = true
-        rightAnchor.isActive = true
-        titleLabelAnchorsH = HorizontalAnchors(left: leftAnchor,
-                                                 right: rightAnchor)
-        
-        NSLayoutConstraint.activate([
-            checkMarkButton.widthAnchor.constraint(equalToConstant: 24),
-            checkMarkButton.heightAnchor.constraint(equalTo: checkMarkButton.widthAnchor),
-            
-            checkMarkButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            checkMarkButton.topAnchor.constraint(equalTo: topAnchor, constant: verticalSpacing),
-            
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: verticalSpacing),
-            
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: topAnchorConstant),
-            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            
-            dateLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            dateLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: topAnchorConstant),
-            dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalSpacing),
-        ])
-    }
-    
-    func setupActions() {
-        checkMarkButton.addAction(
-            UIAction{ [weak self] _ in
-                guard let self else { return }
-                
-                self.toggleTaskCompletion()
-            },
-            for: .touchUpInside)
     }
 }
 
@@ -245,5 +193,58 @@ extension TaskCell: UIContextMenuInteractionDelegate {
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willEndFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
         
         willHideMenu()
+    }
+}
+
+private extension TaskCell {
+    
+    func setupCell() {
+        selectionStyle = .none
+        backgroundColor = .appBlack
+        
+        contentView.addSubview(checkMarkButton)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(dateLabel)
+        
+        let topAnchorConstant: CGFloat = 6
+        let verticalSpacing: CGFloat = 12
+                
+        let leftAnchor = titleLabel.leadingAnchor.constraint(equalTo: checkMarkButton.trailingAnchor, constant: 8)
+        let rightAnchor = titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
+           
+        leftAnchor.isActive = true
+        rightAnchor.isActive = true
+        titleLabelAnchorsH = HorizontalAnchors(left: leftAnchor,
+                                                 right: rightAnchor)
+        
+        NSLayoutConstraint.activate([
+            checkMarkButton.widthAnchor.constraint(equalToConstant: 24),
+            checkMarkButton.heightAnchor.constraint(equalTo: checkMarkButton.widthAnchor),
+            
+            checkMarkButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            checkMarkButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: verticalSpacing),
+            
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: verticalSpacing),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: topAnchorConstant),
+            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            dateLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            dateLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            dateLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: topAnchorConstant),
+            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -verticalSpacing),
+        ])
+    }
+    
+    func setupActions() {
+        checkMarkButton.addAction(
+            UIAction{ [weak self] _ in
+                guard let self else { return }
+                
+                self.toggleTaskCompletion()
+            },
+            for: .touchUpInside)
     }
 }

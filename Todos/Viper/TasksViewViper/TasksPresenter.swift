@@ -26,10 +26,10 @@ final class TasksPresenter {
         self.router = router
     }
     
-    private func filterTitles(by text: String) {
-        if !text.isEmpty {
+    private func filterBySearchedText() {
+        if !searchedText.isEmpty {
             visibleTasks = tasks.filter({
-                $0.title.lowercased().contains(text.lowercased())
+                $0.title.lowercased().contains(searchedText.lowercased())
             })
         } else {
             visibleTasks = tasks
@@ -39,24 +39,43 @@ final class TasksPresenter {
 
 extension TasksPresenter: TasksViewOutput {
     func toggleTaskCompletion(at indexPath: IndexPath) {
+        ///Операция быстрая и занимает O(1) - можно на главном потоке проводить
+        guard var task = visibleTasks[safe: indexPath.row] else { return }
         
-        if var task = visibleTasks[safe: indexPath.row] {
-            
-            task.isCompleted.toggle()
-            interactor.updateTask(task)
-            
-            visibleTasks.safeRemove(at: indexPath.row)
-            visibleTasks.insert(task, at: indexPath.row)
-            view?.updateCell(at: indexPath)
+        task.isCompleted.toggle()
+        interactor.updateTask(task)
+        
+        visibleTasks.safeRemove(at: indexPath.row)
+        visibleTasks.insert(task, at: indexPath.row)
+        view?.updateTasks()
+        
+        ///Операция занимает O(n), поэтому перевожу на фоновый поток
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.tasksLock.lock()
+            if let index = self.tasks.firstIndex(where: { $0.id == task.id }) {
+                
+                self.tasks.safeRemove(at: index)
+                self.tasks.insert(task, at: index)
+            }
+            self.tasksLock.unlock()
         }
     }
     
     func deleteTask(at indexPath: IndexPath) {
-        if let id = visibleTasks[safe: indexPath.row]?.id {
-            
-            interactor.deleteTask(id)
-            visibleTasks.safeRemove(at: indexPath.row)
-            view?.updateTasks()
+        guard let id = visibleTasks[safe: indexPath.row]?.id else { return }
+        
+        visibleTasks.safeRemove(at: indexPath.row)
+        self.view?.updateTasks()
+        
+        ///Операция занимает O(n), поэтому перевожу на фоновый поток
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.tasksLock.lock()
+            if let index = self.tasks.firstIndex(where: { $0.id == id }) {
+                
+                self.interactor.deleteTask(id)
+                self.tasks.safeRemove(at: index)
+            }
+            self.tasksLock.unlock()
         }
     }
     
@@ -87,7 +106,7 @@ extension TasksPresenter: TasksViewOutput {
     func didSearchText(_ text: String) {
         searchedText = text
         
-        filterTitles(by: searchedText)
+        filterBySearchedText()
         view?.updateTasks()
     }
 }
@@ -98,7 +117,7 @@ extension TasksPresenter: TasksInteractorOutput {
         self.tasks = tasks
         tasksLock.unlock()
         
-        filterTitles(by: searchedText)
+        filterBySearchedText()
         view?.updateTasks()
     }
     
@@ -114,7 +133,7 @@ extension TasksPresenter: TasksRouterOutput {
 }
 
 extension TasksPresenter: TaskDetailModuleDelegate {
-    ///Первожу на фоновый поток, потому что операция занимает O(n)
+    ///Операция занимает O(n), поэтому перевожу на фоновый поток
     func didUpdateTask(_ task: TaskDTO) {
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -123,13 +142,13 @@ extension TasksPresenter: TaskDetailModuleDelegate {
             if let index = self.tasks.firstIndex(where: { $0.id == task.id}) {
                 
                 self.tasks[index] = task
+                
+                DispatchQueue.main.async {
+                    self.filterBySearchedText()
+                    self.view?.updateTasks()
+                }
             }
             self.tasksLock.unlock()
-            
-            DispatchQueue.main.async {
-                self.filterTitles(by: self.searchedText)
-                self.view?.updateTasks()
-            }
         }
     }
 }

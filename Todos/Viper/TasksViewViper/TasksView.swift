@@ -112,10 +112,13 @@ final class TasksView: UIViewController, TasksViewInput {
     }
     
     private func setEdgeInsets(for row: Int) -> UIEdgeInsets {
-        if row != presenter?.numberOfTasks() {
-            UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        if let presenter,
+           row != presenter.numberOfTasks() - 1 {
+            
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         } else {
-            UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         }
     }
 }
@@ -177,10 +180,8 @@ extension TasksView: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.separatorInset = setEdgeInsets(for: indexPath.row)
-        cell.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        cell.preservesSuperviewLayoutMargins = false
         cell.configureCell(with: task, delegate: self)
+        cell.separatorInset = setEdgeInsets(for: indexPath.row)
         
         return cell
     }
@@ -194,11 +195,14 @@ private extension TasksView {
         bottomBarContainer.translatesAutoresizingMaskIntoConstraints = false
         bottomBarContainer.backgroundColor = .appGrayDark
         
-        tableView.backgroundColor = .red
+        tableView.backgroundColor = .appBlack
+        tableView.separatorColor = .gray
+        tableView.clipsToBounds = false
+        tableView.tableHeaderView = UIView()
         tableView.contentInset = UIEdgeInsets(top: 0,
-                                              left: 20,
-                                              bottom: 0,
-                                              right: -20)
+                                              left: 0,
+                                              bottom: 80,
+                                              right: 0)
         
         view.addSubview(tableView)
         view.addSubview(bottomBarContainer)
@@ -208,8 +212,8 @@ private extension TasksView {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .defaultMargin),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.defaultMargin),
             
             bottomBarContainer.heightAnchor.constraint(equalToConstant: 84),
             bottomBarContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor),

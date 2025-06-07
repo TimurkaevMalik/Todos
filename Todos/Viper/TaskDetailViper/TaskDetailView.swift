@@ -17,8 +17,6 @@ protocol TaskDetailViewOutput: AnyObject {
     func updateTask(title: String, description: String)
 }
 
-import UIKit
-
 final class TaskDetailView: UIViewController, TaskDetailViewInput {
     var presenter: TaskDetailViewOutput?
     
@@ -27,7 +25,7 @@ final class TaskDetailView: UIViewController, TaskDetailViewInput {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .bold34()
         textField.textColor = .appWhite
-        textField.tintColor = .appWhite
+        textField.tintColor = .appYellow
         textField.backgroundColor = .appBlack
         textField.delegate = self
 
@@ -48,8 +46,8 @@ final class TaskDetailView: UIViewController, TaskDetailViewInput {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = .regular16()
         textView.textColor = .appWhite
+        textView.tintColor = .appYellow
         textView.backgroundColor = .appBlack
-        textView.delegate = self
         textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = 0
         return textView
@@ -111,18 +109,6 @@ extension TaskDetailView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        print("Текст поля ввода: \(textField.text ?? "")")
-        // Здесь можно обработать завершение редактирования
-    }
-}
-
-extension TaskDetailView: UITextViewDelegate {
-    func textViewDidEndEditing(_ textView: UITextView) {
-        print("Текст текстового поля: \(textView.text ?? "")")
-        // Здесь можно обработать завершение редактирования
     }
 }
 

@@ -78,8 +78,6 @@ final class TaskServiceCD: TaskDataBaseServiceProtocol {
             backgroundContext.performAndWait {
                 do {
                     let request: NSFetchRequest<TaskCD> = TaskCD.fetchRequest()
-                    ///Todo - remove
-//                    request.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
                     
                     let tasksCD = try backgroundContext.fetch(request)
                     let tasksDTO = tasksCD.map { $0.toDTO() }
