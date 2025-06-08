@@ -12,7 +12,8 @@
 		BC4D01962DF49AEF00CCFCCE /* NetworkServiceTasksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01952DF49AEC00CCFCCE /* NetworkServiceTasksTests.swift */; };
 		BC4D01982DF4A3E000CCFCCE /* TaskDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01972DF4A3DA00CCFCCE /* TaskDTOTests.swift */; };
 		BC4D019A2DF5A7A000CCFCCE /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01992DF5A7A000CCFCCE /* MockURLProtocol.swift */; };
-		BC4D019D2DF5AB2500CCFCCE /* TaskServiceCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D019C2DF5AB1900CCFCCE /* TaskServiceCD.swift */; };
+		BC4D019D2DF5AB2500CCFCCE /* TaskServiceCDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D019C2DF5AB1900CCFCCE /* TaskServiceCDTests.swift */; };
+		BC4D01A12DF5EF7300CCFCCE /* MockTaskModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01A02DF5EF7300CCFCCE /* MockTaskModelContainer.swift */; };
 		BCA38B162DEF12B60009417F /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B152DEF12B20009417F /* UIFont.swift */; };
 		BCA38B182DEF22F70009417F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B172DEF22F70009417F /* String.swift */; };
 		BCA38B1A2DF05B020009417F /* TasksPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B192DF05AF20009417F /* TasksPresenter.swift */; };
@@ -62,7 +63,8 @@
 		BC4D01952DF49AEC00CCFCCE /* NetworkServiceTasksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTasksTests.swift; sourceTree = "<group>"; };
 		BC4D01972DF4A3DA00CCFCCE /* TaskDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDTOTests.swift; sourceTree = "<group>"; };
 		BC4D01992DF5A7A000CCFCCE /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
-		BC4D019C2DF5AB1900CCFCCE /* TaskServiceCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskServiceCD.swift; sourceTree = "<group>"; };
+		BC4D019C2DF5AB1900CCFCCE /* TaskServiceCDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskServiceCDTests.swift; sourceTree = "<group>"; };
+		BC4D01A02DF5EF7300CCFCCE /* MockTaskModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTaskModelContainer.swift; sourceTree = "<group>"; };
 		BCA38B152DEF12B20009417F /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		BCA38B172DEF22F70009417F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BCA38B192DF05AF20009417F /* TasksPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksPresenter.swift; sourceTree = "<group>"; };
@@ -117,12 +119,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BC4D019B2DF5A7BE00CCFCCE /* Helpers */ = {
+		BC4D019B2DF5A7BE00CCFCCE /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				BC4D01A02DF5EF7300CCFCCE /* MockTaskModelContainer.swift */,
+				BC4D019C2DF5AB1900CCFCCE /* TaskServiceCDTests.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		BC4D019E2DF5EC0500CCFCCE /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				BC4D01992DF5A7A000CCFCCE /* MockURLProtocol.swift */,
+				BC4D01952DF49AEC00CCFCCE /* NetworkServiceTasksTests.swift */,
 			);
-			path = Helpers;
+			path = Network;
+			sourceTree = "<group>";
+		};
+		BC4D019F2DF5EC2300CCFCCE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BC4D01972DF4A3DA00CCFCCE /* TaskDTOTests.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		BCA38B272DF0D76E0009417F /* TaskDetailViper */ = {
@@ -194,10 +214,9 @@
 		BCCBD81C2DEDE806000EFC99 /* TodosTests */ = {
 			isa = PBXGroup;
 			children = (
-				BC4D019C2DF5AB1900CCFCCE /* TaskServiceCD.swift */,
-				BC4D019B2DF5A7BE00CCFCCE /* Helpers */,
-				BC4D01972DF4A3DA00CCFCCE /* TaskDTOTests.swift */,
-				BC4D01952DF49AEC00CCFCCE /* NetworkServiceTasksTests.swift */,
+				BC4D019F2DF5EC2300CCFCCE /* Models */,
+				BC4D019E2DF5EC0500CCFCCE /* Network */,
+				BC4D019B2DF5A7BE00CCFCCE /* CoreData */,
 				BCCBD81B2DEDE806000EFC99 /* TodosTests.swift */,
 			);
 			path = TodosTests;
@@ -434,9 +453,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC4D01982DF4A3E000CCFCCE /* TaskDTOTests.swift in Sources */,
-				BC4D019D2DF5AB2500CCFCCE /* TaskServiceCD.swift in Sources */,
+				BC4D019D2DF5AB2500CCFCCE /* TaskServiceCDTests.swift in Sources */,
 				BCCBD81D2DEDE806000EFC99 /* TodosTests.swift in Sources */,
 				BC4D01962DF49AEF00CCFCCE /* NetworkServiceTasksTests.swift in Sources */,
+				BC4D01A12DF5EF7300CCFCCE /* MockTaskModelContainer.swift in Sources */,
 				BC4D019A2DF5A7A000CCFCCE /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

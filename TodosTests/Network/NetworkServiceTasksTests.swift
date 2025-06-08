@@ -68,7 +68,7 @@ class NetworkServiceTasksTests: XCTestCase {
             }
         }
         
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 1)
     }
     
     func testFetchTasksServerError() {
@@ -99,7 +99,7 @@ class NetworkServiceTasksTests: XCTestCase {
             }
         }
         
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 1)
     }
     
     func testFetchTasksDecodingError() {
@@ -138,6 +138,6 @@ class NetworkServiceTasksTests: XCTestCase {
             }
         }
         
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 1)
     }
 }

@@ -11,7 +11,6 @@ import XCTest
 final class TaskDTOTests: XCTestCase {
     
     func testTaskDTODefaultValues() {
-        // Given
         let jsonData = """
         {
             "todo": "This is a very long task description that should be truncated",
@@ -19,10 +18,8 @@ final class TaskDTOTests: XCTestCase {
         }
         """.data(using: .utf8)!
         
-        // When
         let task = try? JSONDecoder().decode(TaskDTO.self, from: jsonData)
         
-        // Then
         XCTAssertNotNil(task)
         XCTAssertEqual(task!.title, "This is a very long ...")
         XCTAssertFalse(task!.isCompleted)
