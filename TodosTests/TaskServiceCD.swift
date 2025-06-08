@@ -18,30 +18,23 @@ class TaskServiceCDTests: XCTestCase {
     override func setUp() {
         super.setUp()
         mockContainer = MockTaskModelContainer()
-        sut = TaskServiceCD(coreStack: mockContainer)
-        
-        // Очищаем базу перед каждым тестом
-//        clearDatabase()
+        sut = TaskServiceCD(stackCD: mockContainer)
     }
     
     override func tearDown() {
-//        clearDatabase()
-//        mockContainer.reset()
-//        mockContainer.destroyContainer()
         sut = nil
         mockContainer = nil
         super.tearDown()
     }
     
     private func clearDatabase() {
-        let context = mockContainer.newBackgroundContext()
         
-        context.perform {
+        mockContainer.backgroundContext.perform {
             do {
                 let fetchRequest: NSFetchRequest<NSFetchRequestResult> = TaskCD.fetchRequest()
                 let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-                try context.execute(deleteRequest)
-                try context.save()
+                try self.mockContainer.backgroundContext.execute(deleteRequest)
+                try self.mockContainer.backgroundContext.save()
             } catch {
                 XCTFail("Failed to clear database: \(error)")
             }
@@ -116,40 +109,83 @@ class TaskServiceCDTests: XCTestCase {
         
         wait(for: [expectation], timeout: 1.0)
     }
+    
+    func testFetchAllTasksEmpty() {
+        let expectation = XCTestExpectation(description: "Fetch all tasks empty")
+        
+        sut.fetchAllTasks { result in
+            switch result {
+            case .success(let tasks):
+                XCTAssertTrue(tasks.isEmpty)
+            case .failure(let error):
+                XCTFail("Expected success, got failure: \(error.message)")
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testFetchAllTasksWithCoreDataError() {
+        let expectation = XCTestExpectation(description: "Fetch all tasks with CoreData error")
+        
+//        mockContainer.shouldThrowError = true
+        
+        sut.fetchAllTasks { result in
+            // Then
+            switch result {
+            case .success:
+                XCTFail("Expected failure, got success")
+            case .failure(let error):
+                if case .operation(let type, _) = error {
+                    XCTAssertEqual(type, .retrieve)
+                } else {
+                    XCTFail("Unexpected error type")
+                }
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
 }
 
 // MARK: - Mock CoreData Stack
-class MockTaskModelContainer: AnyTaskModelContainer {
-    var shouldThrowError = false
-    let persistentContainer: NSPersistentContainer
+final class MockTaskModelContainer: AnyTaskModelContainer {
+    private let shouldThrowError: Bool
     
-    init() {
+    private let persistentContainer: NSPersistentContainer
+    
+    lazy var backgroundContext: NSManagedObjectContext = {
+        
+        if shouldThrowError {
+            let context = MockManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+            context.shouldThrowError = true
+            return context
+        }
+        
+        let context = persistentContainer.newBackgroundContext()
+        context.automaticallyMergesChangesFromParent = true
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        return context
+    }()
+    
+    init(throwError: Bool = false) {
+        shouldThrowError = throwError
+        
         persistentContainer = NSPersistentContainer(name: "TaskModel")
         let description = persistentContainer.persistentStoreDescriptions.first
         
         description?.type = NSInMemoryStoreType
-        
-//        container.persistentStoreDescriptions = [description]
-        
+                
         persistentContainer.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         }
     }
-    
-    func newBackgroundContext() -> NSManagedObjectContext {
-        if shouldThrowError {
-            let context = MockManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-            context.shouldThrowError = true
-            return context
-        }
-        let context = persistentContainer.viewContext
-        context.automaticallyMergesChangesFromParent = true
-        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        return context
-    }
 }
+
 
 class MockManagedObjectContext: NSManagedObjectContext {
     var shouldThrowError = false
@@ -168,46 +204,6 @@ class MockManagedObjectContext: NSManagedObjectContext {
         try super.save()
     }
 }
-
-//func testFetchAllTasksEmpty() {
-//    let expectation = XCTestExpectation(description: "Fetch all tasks empty")
-//    
-//    sut.fetchAllTasks { result in
-//        switch result {
-//        case .success(let tasks):
-//            XCTAssertTrue(tasks.isEmpty)
-//        case .failure(let error):
-//            XCTFail("Expected success, got failure: \(error.message)")
-//        }
-//        expectation.fulfill()
-//    }
-//    
-//    wait(for: [expectation], timeout: 1.0)
-//}
-//
-//func testFetchAllTasksWithCoreDataError() {
-//    // Given
-//    let expectation = XCTestExpectation(description: "Fetch all tasks with CoreData error")
-//    mockContainer.shouldThrowError = true
-//    
-//    // When
-//    sut.fetchAllTasks { result in
-//        // Then
-//        switch result {
-//        case .success:
-//            XCTFail("Expected failure, got success")
-//        case .failure(let error):
-//            if case .operation(let type, _) = error {
-//                XCTAssertEqual(type, .retrieve)
-//            } else {
-//                XCTFail("Unexpected error type")
-//            }
-//        }
-//        expectation.fulfill()
-//    }
-//    
-//    wait(for: [expectation], timeout: 1.0)
-//}
 
 //// MARK: - Update Tests
 //

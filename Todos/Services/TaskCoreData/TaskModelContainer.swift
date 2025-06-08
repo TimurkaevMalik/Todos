@@ -8,30 +8,28 @@
 import CoreData
 
 protocol AnyTaskModelContainer {
-    func newBackgroundContext() -> NSManagedObjectContext
+    var backgroundContext: NSManagedObjectContext { get }
 }
 
 final class TaskModelContainer: AnyTaskModelContainer {
     
     static let shared = TaskModelContainer()
     
-    private init() {}
+    private let persistentContainer: NSPersistentContainer
+    let backgroundContext: NSManagedObjectContext
     
-    private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "TaskModel")
+    private init() {
+        persistentContainer = NSPersistentContainer(name: "TaskModel")
         
-        container.loadPersistentStores { _, error in
+        persistentContainer.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 assertionFailure("Catched error while loading Persistent Stores. Error: \(error.localizedDescription)")
             }
         }
-        container.viewContext.automaticallyMergesChangesFromParent = true
-        return container
-    }()
-    
-    func newBackgroundContext() -> NSManagedObjectContext {
-        let context = persistentContainer.newBackgroundContext()
-        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        return context
+        
+        persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
+        
+        backgroundContext = persistentContainer.newBackgroundContext()
+        backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
 }
