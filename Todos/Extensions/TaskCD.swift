@@ -1,0 +1,36 @@
+//
+//  TaskCD.swift
+//  Todos
+//
+//  Created by Malik Timurkaev on 02.06.2025.
+//
+
+import CoreData
+
+extension TaskCD {
+    func toDTO() -> TaskDTO {
+        TaskDTO(
+            id: id ?? UUID(),
+            createdAt: createdAt ?? Date(),
+            title: title ?? "",
+            todo: todo ?? "",
+            isCompleted: isCompleted
+        )
+    }
+    
+    static func create(from dto: TaskDTO,
+                       on context: NSManagedObjectContext) -> TaskCD {
+        
+        let entiry = TaskCD(context: context)
+        entiry.updateFrom(taskDTO: dto)
+        return entiry
+    }
+    
+    func updateFrom(taskDTO: TaskDTO) {
+        self.id = taskDTO.id
+        self.title = taskDTO.title
+        self.todo = taskDTO.todo
+        self.createdAt = taskDTO.createdAt
+        self.isCompleted = taskDTO.isCompleted
+    }
+}
