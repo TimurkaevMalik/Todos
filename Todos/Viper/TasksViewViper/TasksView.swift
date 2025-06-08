@@ -27,6 +27,7 @@ protocol TasksViewOutput {
     func numberOfTasks() -> Int
     
     func didSearchText(_ text: String)
+    func createTaskButtonTap()
 }
 
 final class TasksView: UIViewController, TasksViewInput {
@@ -84,6 +85,7 @@ final class TasksView: UIViewController, TasksViewInput {
         super.viewDidLoad()
         view.backgroundColor = .appBlack
         setupUI()
+        setupActions()
         presenter?.viewDidLoad()
     }
         
@@ -101,6 +103,10 @@ final class TasksView: UIViewController, TasksViewInput {
             applicationActivities: nil
         )
         present(activityVC, animated: true)
+    }
+    
+    private func createTaskButtonTap() {
+        presenter?.createTaskButtonTap()
     }
     
     private func setTextForTasksAmountLabel(_ amount: Int) {
@@ -255,5 +261,11 @@ private extension TasksView {
         searchController.searchBar.layer.masksToBounds = true
         
         navigationItem.searchController = searchController
+    }
+    
+    private func setupActions() {
+        editButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.createTaskButtonTap()
+        }), for: .touchUpInside)
     }
 }

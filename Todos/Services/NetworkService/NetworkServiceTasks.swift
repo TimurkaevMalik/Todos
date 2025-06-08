@@ -42,7 +42,7 @@ final class NetworkServiceTasks: NetworkServiceTasksProtocol {
             
             guard let self else { return }
             
-            ///Обнуляем task по завершению метода
+            ///Обнуляем activeTask по завершению метода
             defer {
                 self.activeTask = nil
             }

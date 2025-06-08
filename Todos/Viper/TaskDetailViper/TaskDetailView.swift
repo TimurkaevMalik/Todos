@@ -18,6 +18,7 @@ protocol TaskDetailViewOutput: AnyObject {
 }
 
 final class TaskDetailView: UIViewController, TaskDetailViewInput {
+    
     var presenter: TaskDetailViewOutput?
     
     private lazy var titleTextField: UITextField = {
@@ -28,7 +29,8 @@ final class TaskDetailView: UIViewController, TaskDetailViewInput {
         textField.tintColor = .appYellow
         textField.backgroundColor = .appBlack
         textField.delegate = self
-
+        textField.placeholder = "Title"
+        
         return textField
     }()
     
@@ -50,9 +52,10 @@ final class TaskDetailView: UIViewController, TaskDetailViewInput {
         textView.backgroundColor = .appBlack
         textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = 0
+        
         return textView
     }()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()

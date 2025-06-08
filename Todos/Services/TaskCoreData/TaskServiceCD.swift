@@ -100,7 +100,8 @@ final class TaskServiceCD: TaskDataBaseServiceProtocol {
                 request.predicate = NSPredicate(format: "id == %@", task.id as CVarArg)
                 
                 guard let taskCD = try backgroundContext.fetch(request).first else {
-                    throw NSError(domain: "TaskNotFound", code: 404, userInfo: nil)
+                    createTasks([task], completion: completion)
+                    return
                 }
                 
                 taskCD.title = task.title

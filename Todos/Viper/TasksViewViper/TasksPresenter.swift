@@ -38,6 +38,10 @@ final class TasksPresenter {
 }
 
 extension TasksPresenter: TasksViewOutput {
+    func viewDidLoad() {
+        interactor.fetchTasks()
+    }
+    
     func toggleTaskCompletion(at indexPath: IndexPath) {
         ///Операция быстрая и занимает O(1) - можно на главном потоке проводить
         guard var task = visibleTasks[safe: indexPath.row] else { return }
@@ -84,10 +88,6 @@ extension TasksPresenter: TasksViewOutput {
             router.showTaskDetail(for: task, delegate: self)
         }
     }
-    
-    func viewDidLoad() {
-        interactor.fetchTasks()
-    }
 
     func shareTask(at indexPath: IndexPath) {
         guard let task = visibleTasks[safe: indexPath.row] else { return }
@@ -108,6 +108,12 @@ extension TasksPresenter: TasksViewOutput {
         
         filterBySearchedText()
         view?.updateTasks()
+    }
+    
+    func createTaskButtonTap() {
+        let newTask = TaskDTO(title: "Title",
+                              todo: "Description")
+        router.showTaskDetail(for: newTask, delegate: self)
     }
 }
 
@@ -143,11 +149,15 @@ extension TasksPresenter: TaskDetailModuleDelegate {
                 
                 self.tasks[index] = task
                 
-                DispatchQueue.main.async {
-                    self.filterBySearchedText()
-                    self.view?.updateTasks()
-                }
+            } else {
+                self.tasks.append(task)
             }
+            
+            DispatchQueue.main.async {
+                self.filterBySearchedText()
+                self.view?.updateTasks()
+            }
+            
             self.tasksLock.unlock()
         }
     }

@@ -23,7 +23,6 @@ final class TaskDetailPresenter {
         self.task = task
         self.interactor = interactor
         self.delegate = delegate
-        delegate?.didUpdateTask(TaskDTO(title: "ds", todo: "ds"))
     }
 }
 
