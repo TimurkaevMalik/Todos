@@ -18,10 +18,10 @@ final class NetworkServiceTasks: NetworkServiceTasksProtocol {
     
     private var activeTask: URLSessionTask?
     
-    init(session: URLSession = .shared,
+    init(config: URLSessionConfiguration = .default,
          decoder: JSONDecoder = JSONDecoder()) {
         
-        self.session = session
+        self.session = URLSession(configuration: config)
         self.decoder = decoder
     }
     

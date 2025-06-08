@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum EndPoint {
+enum EndPoint {
     static let baseURL = "https://dummyjson.com/todos"
     
     case baseServer

@@ -5,6 +5,7 @@
 //  Created by Malik Timurkaev on 02.06.2025.
 //
 
+import Foundation
 
 enum NetworkError: Error {
     case invalidURL

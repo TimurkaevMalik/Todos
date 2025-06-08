@@ -12,7 +12,7 @@ enum ServiceError: Error {
     case operation(_ type: ServiceOperation,
                    code: String = "uknown")
     
-    public var message: String {
+    var message: String {
         switch self {
             
         case .taskAlreadyExists:

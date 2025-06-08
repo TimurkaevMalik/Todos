@@ -27,7 +27,7 @@ final class TaskServiceCD: TaskDataBaseServiceProtocol {
     private let serialQueue = DispatchQueue(label: "TaskServiceCD.queue",
                                             qos: .userInitiated)
     
-    init() {
+    init(coreStack: AnyTaskModelContainer = TaskModelContainer.shared) {
         self.coreDataStack = TaskModelContainer.shared
     }
     

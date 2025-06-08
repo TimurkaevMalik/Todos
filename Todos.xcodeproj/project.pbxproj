@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		BC4D01922DF33E0B00CCFCCE /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01912DF33E0B00CCFCCE /* CGFloat.swift */; };
 		BC4D01942DF33EBF00CCFCCE /* TaskDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01932DF33EB800CCFCCE /* TaskDetailInteractor.swift */; };
+		BC4D01962DF49AEF00CCFCCE /* NetworkServiceTasksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01952DF49AEC00CCFCCE /* NetworkServiceTasksTests.swift */; };
+		BC4D01982DF4A3E000CCFCCE /* TaskDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01972DF4A3DA00CCFCCE /* TaskDTOTests.swift */; };
+		BC4D019A2DF5A7A000CCFCCE /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D01992DF5A7A000CCFCCE /* MockURLProtocol.swift */; };
+		BC4D019D2DF5AB2500CCFCCE /* TaskServiceCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D019C2DF5AB1900CCFCCE /* TaskServiceCD.swift */; };
 		BCA38B162DEF12B60009417F /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B152DEF12B20009417F /* UIFont.swift */; };
 		BCA38B182DEF22F70009417F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B172DEF22F70009417F /* String.swift */; };
 		BCA38B1A2DF05B020009417F /* TasksPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA38B192DF05AF20009417F /* TasksPresenter.swift */; };
@@ -27,8 +31,6 @@
 		BCCBD8172DEDE7F8000EFC99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCCBD80B2DEDE7F8000EFC99 /* Assets.xcassets */; };
 		BCCBD8192DEDE7F8000EFC99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCCBD80E2DEDE7F8000EFC99 /* LaunchScreen.storyboard */; };
 		BCCBD81D2DEDE806000EFC99 /* TodosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD81B2DEDE806000EFC99 /* TodosTests.swift */; };
-		BCCBD8212DEDE808000EFC99 /* TodosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD81E2DEDE808000EFC99 /* TodosUITests.swift */; };
-		BCCBD8222DEDE808000EFC99 /* TodosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD81F2DEDE808000EFC99 /* TodosUITestsLaunchTests.swift */; };
 		BCCBD82A2DEDEFC4000EFC99 /* TaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD8282DEDEFC4000EFC99 /* TaskModel.xcdatamodeld */; };
 		BCCBD82D2DEDF417000EFC99 /* TaskDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD82C2DEDF417000EFC99 /* TaskDTO.swift */; };
 		BCCBD82F2DEDF55D000EFC99 /* TaskServiceCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCBD82E2DEDF55D000EFC99 /* TaskServiceCD.swift */; };
@@ -52,18 +54,15 @@
 			remoteGlobalIDString = BCCBD7D52DEDE7E9000EFC99;
 			remoteInfo = Todos;
 		};
-		BCCBD7F72DEDE7EB000EFC99 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BCCBD7CE2DEDE7E9000EFC99 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BCCBD7D52DEDE7E9000EFC99;
-			remoteInfo = Todos;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		BC4D01912DF33E0B00CCFCCE /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		BC4D01932DF33EB800CCFCCE /* TaskDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailInteractor.swift; sourceTree = "<group>"; };
+		BC4D01952DF49AEC00CCFCCE /* NetworkServiceTasksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTasksTests.swift; sourceTree = "<group>"; };
+		BC4D01972DF4A3DA00CCFCCE /* TaskDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDTOTests.swift; sourceTree = "<group>"; };
+		BC4D01992DF5A7A000CCFCCE /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		BC4D019C2DF5AB1900CCFCCE /* TaskServiceCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskServiceCD.swift; sourceTree = "<group>"; };
 		BCA38B152DEF12B20009417F /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		BCA38B172DEF22F70009417F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BCA38B192DF05AF20009417F /* TasksPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksPresenter.swift; sourceTree = "<group>"; };
@@ -78,7 +77,6 @@
 		BCA38B302DF1C7C20009417F /* CustomDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDateFormatter.swift; sourceTree = "<group>"; };
 		BCCBD7D62DEDE7E9000EFC99 /* Todos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCBD7EC2DEDE7EB000EFC99 /* TodosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BCCBD7F62DEDE7EB000EFC99 /* TodosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCBD80A2DEDE7F8000EFC99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCCBD80B2DEDE7F8000EFC99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCCBD80C2DEDE7F8000EFC99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,8 +84,6 @@
 		BCCBD8112DEDE7F8000EFC99 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BCCBD8122DEDE7F8000EFC99 /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
 		BCCBD81B2DEDE806000EFC99 /* TodosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosTests.swift; sourceTree = "<group>"; };
-		BCCBD81E2DEDE808000EFC99 /* TodosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosUITests.swift; sourceTree = "<group>"; };
-		BCCBD81F2DEDE808000EFC99 /* TodosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BCCBD8292DEDEFC4000EFC99 /* TaskModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskModel.xcdatamodel; sourceTree = "<group>"; };
 		BCCBD82C2DEDF417000EFC99 /* TaskDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDTO.swift; sourceTree = "<group>"; };
 		BCCBD82E2DEDF55D000EFC99 /* TaskServiceCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskServiceCD.swift; sourceTree = "<group>"; };
@@ -118,16 +114,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BCCBD7F32DEDE7EB000EFC99 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC4D019B2DF5A7BE00CCFCCE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BC4D01992DF5A7A000CCFCCE /* MockURLProtocol.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		BCA38B272DF0D76E0009417F /* TaskDetailViper */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,7 +160,6 @@
 			children = (
 				BCCBD8132DEDE7F8000EFC99 /* Todos */,
 				BCCBD81C2DEDE806000EFC99 /* TodosTests */,
-				BCCBD8202DEDE808000EFC99 /* TodosUITests */,
 				BCCBD7D72DEDE7E9000EFC99 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -173,7 +169,6 @@
 			children = (
 				BCCBD7D62DEDE7E9000EFC99 /* Todos.app */,
 				BCCBD7EC2DEDE7EB000EFC99 /* TodosTests.xctest */,
-				BCCBD7F62DEDE7EB000EFC99 /* TodosUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -199,18 +194,13 @@
 		BCCBD81C2DEDE806000EFC99 /* TodosTests */ = {
 			isa = PBXGroup;
 			children = (
+				BC4D019C2DF5AB1900CCFCCE /* TaskServiceCD.swift */,
+				BC4D019B2DF5A7BE00CCFCCE /* Helpers */,
+				BC4D01972DF4A3DA00CCFCCE /* TaskDTOTests.swift */,
+				BC4D01952DF49AEC00CCFCCE /* NetworkServiceTasksTests.swift */,
 				BCCBD81B2DEDE806000EFC99 /* TodosTests.swift */,
 			);
 			path = TodosTests;
-			sourceTree = "<group>";
-		};
-		BCCBD8202DEDE808000EFC99 /* TodosUITests */ = {
-			isa = PBXGroup;
-			children = (
-				BCCBD81E2DEDE808000EFC99 /* TodosUITests.swift */,
-				BCCBD81F2DEDE808000EFC99 /* TodosUITestsLaunchTests.swift */,
-			);
-			path = TodosUITests;
 			sourceTree = "<group>";
 		};
 		BCCBD8232DEDE899000EFC99 /* Viper */ = {
@@ -228,8 +218,8 @@
 			children = (
 				BCA38B302DF1C7C20009417F /* CustomDateFormatter.swift */,
 				BCCBD83C2DEE17D2000EFC99 /* NetworkService */,
-				BCCBD8352DEE0746000EFC99 /* ServiceError */,
 				BCCBD8252DEDEDA7000EFC99 /* TaskCoreData */,
+				BCCBD8352DEE0746000EFC99 /* ServiceError */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -343,26 +333,6 @@
 			productReference = BCCBD7EC2DEDE7EB000EFC99 /* TodosTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		BCCBD7F52DEDE7EB000EFC99 /* TodosUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BCCBD8072DEDE7EB000EFC99 /* Build configuration list for PBXNativeTarget "TodosUITests" */;
-			buildPhases = (
-				BCCBD7F22DEDE7EB000EFC99 /* Sources */,
-				BCCBD7F32DEDE7EB000EFC99 /* Frameworks */,
-				BCCBD7F42DEDE7EB000EFC99 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BCCBD7F82DEDE7EB000EFC99 /* PBXTargetDependency */,
-			);
-			name = TodosUITests;
-			packageProductDependencies = (
-			);
-			productName = TodosUITests;
-			productReference = BCCBD7F62DEDE7EB000EFC99 /* TodosUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -377,10 +347,6 @@
 						CreatedOnToolsVersion = 16.3;
 					};
 					BCCBD7EB2DEDE7EB000EFC99 = {
-						CreatedOnToolsVersion = 16.3;
-						TestTargetID = BCCBD7D52DEDE7E9000EFC99;
-					};
-					BCCBD7F52DEDE7EB000EFC99 = {
 						CreatedOnToolsVersion = 16.3;
 						TestTargetID = BCCBD7D52DEDE7E9000EFC99;
 					};
@@ -402,7 +368,6 @@
 			targets = (
 				BCCBD7D52DEDE7E9000EFC99 /* Todos */,
 				BCCBD7EB2DEDE7EB000EFC99 /* TodosTests */,
-				BCCBD7F52DEDE7EB000EFC99 /* TodosUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -418,13 +383,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BCCBD7EA2DEDE7EB000EFC99 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BCCBD7F42DEDE7EB000EFC99 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -475,16 +433,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC4D01982DF4A3E000CCFCCE /* TaskDTOTests.swift in Sources */,
+				BC4D019D2DF5AB2500CCFCCE /* TaskServiceCD.swift in Sources */,
 				BCCBD81D2DEDE806000EFC99 /* TodosTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BCCBD7F22DEDE7EB000EFC99 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BCCBD8212DEDE808000EFC99 /* TodosUITests.swift in Sources */,
-				BCCBD8222DEDE808000EFC99 /* TodosUITestsLaunchTests.swift in Sources */,
+				BC4D01962DF49AEF00CCFCCE /* NetworkServiceTasksTests.swift in Sources */,
+				BC4D019A2DF5A7A000CCFCCE /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,11 +448,6 @@
 			isa = PBXTargetDependency;
 			target = BCCBD7D52DEDE7E9000EFC99 /* Todos */;
 			targetProxy = BCCBD7ED2DEDE7EB000EFC99 /* PBXContainerItemProxy */;
-		};
-		BCCBD7F82DEDE7EB000EFC99 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BCCBD7D52DEDE7E9000EFC99 /* Todos */;
-			targetProxy = BCCBD7F72DEDE7EB000EFC99 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -530,6 +478,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -562,6 +511,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -708,13 +658,17 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8V4HQNY692;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.practicum.Timurkaev.TodosTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Todos.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Todos";
 			};
 			name = Debug;
@@ -727,48 +681,18 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8V4HQNY692;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.practicum.Timurkaev.TodosTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Todos.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Todos";
-			};
-			name = Release;
-		};
-		BCCBD8082DEDE7EB000EFC99 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8V4HQNY692;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.practicum.Timurkaev.TodosUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Todos;
-			};
-			name = Debug;
-		};
-		BCCBD8092DEDE7EB000EFC99 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8V4HQNY692;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.practicum.Timurkaev.TodosUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Todos;
 			};
 			name = Release;
 		};
@@ -798,15 +722,6 @@
 			buildConfigurations = (
 				BCCBD8052DEDE7EB000EFC99 /* Debug */,
 				BCCBD8062DEDE7EB000EFC99 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BCCBD8072DEDE7EB000EFC99 /* Build configuration list for PBXNativeTarget "TodosUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BCCBD8082DEDE7EB000EFC99 /* Debug */,
-				BCCBD8092DEDE7EB000EFC99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
